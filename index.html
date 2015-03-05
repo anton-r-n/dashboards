@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Dashboard vanilla js</title>
+
+<link rel="stylesheet" href="./styles/css/reset.css" />
+<!-- link rel="stylesheet" href="./styles/css/styles.css" / -->
+
+<script src="./scripts/lib/shortcuts.js"></script>
+<script src="./scripts/lib/templates.js"></script>
+<script src="./scripts/lib/numbers.js"></script>
+<script src="./scripts/lib/dates.js"></script>
+<script src="./scripts/lib/widget.js"></script>
+
+<script src="./scripts/widgets/app.js"></script>
+
+<script src="./scripts/init.js"></script>
+
+
+<script data-tpl="App" type="text/html">
+  <div class="App" data-obj="<%= _.id %>">
+    <%: $.tpl('menu', _.menu) %>
+    <div class="content"><%: _.content %></div>
+  </div>
+</script>
+
+
+<script data-tpl="menu" type="text/html">
+  <div class="menu">menu</div>
+</script>
+
+
+<script data-tpl="Page" type="text/html">
+  <div class="Page" data-obj="<%= _.id %>">
+    Page <%= _.id %>
+    <div class="content"><%: _.content %></div>
+  </div>
+</script>
+
+
+<script data-tpl="Panel" type="text/html">
+  <div class="Panel" data-obj="<%= _.id %>">
+    Panel <%= _.id %>
+  </div>
+</script>
+
+</head>
+
+<body></body>
+</html>
