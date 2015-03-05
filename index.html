@@ -42,7 +42,15 @@
 <script data-tpl="Panel" type="text/html">
   <div class="Panel" data-obj="<%= _.id %>">
     Panel <%= _.id %>
+    <div class="content"><%: _.content %></div>
   </div>
+</script>
+
+
+<script data-tpl="Column" type="text/html">
+  <span class="Column" data-obj="<%= _.id %>">
+    Column <%= _.id %>
+  </span>
 </script>
 
 </head>

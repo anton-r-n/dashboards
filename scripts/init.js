@@ -10,11 +10,29 @@ var data = {
       'children': [
         {
           'type': 'Panel',
-          'children': []
+          'children': [
+            {
+              'type': 'Column',
+              'width': '12'
+            },
+            {
+              'type': 'Column',
+              'width': '12'
+            }
+          ]
         },
         {
           'type': 'Panel',
-          'children': []
+          'children': [
+            {
+              'type': 'Column',
+              'width': '12'
+            },
+            {
+              'type': 'Column',
+              'width': '12'
+            }
+          ]
         }
       ]
     }

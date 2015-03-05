@@ -38,7 +38,7 @@ Widget.prototype._findRootNode = function() {
 Widget.prototype._init = function(id, data, width) {
   this.id = id;
   this.data = data;
-  this.children = this._initChildren(data.children);
+  this.children = this._initChildren(data.children || []);
 
   this.context = this.context || {};
   this.context.id = id;
