@@ -35,5 +35,15 @@
     }
   }
 
-  dom.prototype = [];
+  dom.prototype = new Array();
+
+  dom.prototype.html = function() {
+    if (arguments.length > 0) {
+      this[0].innerHTML = arguments[0];
+      return this;
+    }
+    else {
+      return this.length > 0 ? this[0].innerHTML: '';
+    }
+  };
 })();

@@ -20,7 +20,9 @@ widgets.App.prototype.init = function(id, data, width) {
 
 
 widgets.App.prototype.update = function(data, width) {
-  return $.tpl('app', this);
+  this.context = {};
+  this.context.menu = data.menu;
+  this._update(data, width);
 };
 
 

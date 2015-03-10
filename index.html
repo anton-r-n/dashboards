@@ -27,13 +27,24 @@
 
 
 <script data-tpl="menu" type="text/html">
-  <div class="menu">menu</div>
+  <div class="menu">
+    menu
+    <ul>
+      <% for (var i = 0; i < _.length; i++) { %>
+        <li>
+          <a href="<%: _[i].link %>">
+            <%= _[i].name %>
+          </a>
+        </li>
+      <% } %>
+    </ul>
+  </div>
 </script>
 
 
 <script data-tpl="Page" type="text/html">
   <div class="Page" data-obj="<%= _.id %>">
-    Page <%= _.id %>
+    Page <%= _.id %> <%= _.name %>
     <div class="content"><%: _.content %></div>
   </div>
 </script>

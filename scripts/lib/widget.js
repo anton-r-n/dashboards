@@ -38,11 +38,14 @@ Widget.prototype._findRootNode = function() {
 Widget.prototype._init = function(id, data, width) {
   this.id = id;
   this.data = data;
-  this.children = this._initChildren(data.children || []);
 
   this.context = this.context || {};
   this.context.id = id;
-  this.context.content = this._collectContent(this.children);
+
+  if (data.children && data.children.length) {
+    this.children = this._initChildren(data.children);
+    this.context.content = this._collectContent(this.children);
+  }
 
   this._findRootNode();
   this._html = $.tpl(this.tpl, this.context);
@@ -55,6 +58,21 @@ Widget.prototype._initChildren = function(children) {
     var wid = self.id + '.' + item.type + idx;
     return new widgets[item.type]().init(wid, item);
   });
+};
+
+
+Widget.prototype._update = function(data, width) {
+  this.context = this.context || {};
+  this.context.id = this.id;
+
+  if (data.children && data.children.length) {
+    this.children = this._initChildren(data.children);
+    this.context.content = this._collectContent(this.children);
+  }
+
+  this._html = $.tpl(this.tpl, this.context);
+  this._root.html(this._html);
+  this.data = data;
 };
 
 
