@@ -20,20 +20,19 @@
 
 <script data-tpl="App" type="text/html">
   <div class="App" data-obj="<%= _.id %>">
-    <%: $.tpl('menu', _.menu) %>
-    <div class="content"><%: _.content %></div>
+    <%: _.content %>
   </div>
 </script>
 
 
-<script data-tpl="menu" type="text/html">
-  <div class="menu">
-    menu
+<script data-tpl="Menu" type="text/html">
+  <div class="Menu" data-obj="<%= _.id %>">
+    Menu
     <ul>
-      <% for (var i = 0; i < _.length; i++) { %>
+      <% for (var i = 0; i < _.items.length; i++) { %>
         <li>
-          <a href="<%: _[i].link %>">
-            <%= _[i].name %>
+          <a href="<%: _.items[i].link %>">
+            <%= _.items[i].name %>
           </a>
         </li>
       <% } %>
@@ -45,7 +44,7 @@
 <script data-tpl="Page" type="text/html">
   <div class="Page" data-obj="<%= _.id %>">
     Page <%= _.id %> <%= _.name %>
-    <div class="content"><%: _.content %></div>
+    <%: _.content %>
   </div>
 </script>
 
@@ -53,7 +52,7 @@
 <script data-tpl="Panel" type="text/html">
   <div class="Panel" data-obj="<%= _.id %>">
     Panel <%= _.id %>
-    <div class="content"><%: _.content %></div>
+    <%: _.content %>
   </div>
 </script>
 
