@@ -2,7 +2,7 @@
 
 var data = {
   'type': 'App',
-  'children': [
+  'nodes': [
     {
       'type': 'Menu',
       'items': [
@@ -15,10 +15,10 @@ var data = {
     {
       'type': 'Page',
       'name': 'PPP1',
-      'children': [
+      'nodes': [
         {
           'type': 'Panel',
-          'children': [
+          'nodes': [
             {
               'type': 'Column',
               'width': '12'
@@ -31,7 +31,7 @@ var data = {
         },
         {
           'type': 'Panel',
-          'children': [
+          'nodes': [
             {
               'type': 'Column',
               'width': '12'
@@ -53,15 +53,14 @@ $(function() {
   var app = new Widget().init('App', data, 100);
   $('body').html(app._html);
 
-  update.children[0].items = [
-    {'name': 'NewLink1', 'link': '/aaaaa1'},
-    {'name': 'NewLink2', 'link': '/bbbbb2'},
-    {'name': 'NewLink3', 'link': '/ccccc3'},
-  ];
-
-  update.children[1].name = 'PPP2';
-
   setTimeout(function() {
+    update.nodes[1].name = 'PPP2';
+    update.nodes[0].items = [
+      {'name': 'NewLink1', 'link': '/aaaaa1'},
+      {'name': 'NewLink2', 'link': '/bbbbb2'},
+      {'name': 'NewLink3', 'link': '/ccccc3'},
+    ];
+
     app.update(update, 100);
     console.log('update');
   }, 2000);
