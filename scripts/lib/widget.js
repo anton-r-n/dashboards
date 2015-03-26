@@ -25,7 +25,11 @@ Widget.prototype.init = function(id, data, width) {
  */
 Widget.prototype.update = function(data, width) {
   this._renderRecursively(data, width);
-  this._root.html(this._html);
+  var render = $.render(this._html);
+  this._root.html('');
+  while (render.firstChild) {
+    this._root[0].appendChild(render.firstChild);
+  }
 };
 
 
