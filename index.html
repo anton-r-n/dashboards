@@ -5,7 +5,8 @@
 <title>Dashboard vanilla js</title>
 
 <link rel="stylesheet" href="./styles/css/reset.css" />
-<!-- link rel="stylesheet" href="./styles/css/styles.css" / -->
+<link rel="stylesheet" href="./styles/css/grid.css" />
+<link rel="stylesheet" href="./styles/css/header.css" />
 
 <script src="./scripts/lib/shortcuts.js"></script>
 <script src="./scripts/lib/templates.js"></script>
@@ -22,6 +23,13 @@
   <div class="App" data-obj="<%= _.id %>">
     <%: _.content %>
   </div>
+</script>
+
+
+<script data-tpl="Header" type="text/html">
+  <header class="Header" data-obj="<%= _.id %>">
+    <%= _.text %>
+  </header>
 </script>
 
 
@@ -44,23 +52,24 @@
 <script data-tpl="Page" type="text/html">
   <div class="Page" data-obj="<%= _.id %>">
     Page <%= _.id %> <%= _.name %>
-    <%: _.content %>
+    <div class="grid">
+      <%: _.content %>
+    </div>
   </div>
 </script>
 
 
 <script data-tpl="Panel" type="text/html">
-  <div class="Panel" data-obj="<%= _.id %>">
-    Panel <%= _.id %>
+  <div class="Panel row" data-obj="<%= _.id %>">
     <%: _.content %>
   </div>
 </script>
 
 
 <script data-tpl="Column" type="text/html">
-  <span class="Column" data-obj="<%= _.id %>">
+  <div class="Column col-<%= _.width %>" data-obj="<%= _.id %>">
     Column <%= _.id %>
-  </span>
+  </div>
 </script>
 
 </head>

@@ -4,6 +4,11 @@ var data = {
   'type': 'App',
   'nodes': [
     {
+      'type': 'Header',
+      'text': 'Header Text',
+    },
+
+    {
       'type': 'Menu',
       'items': [
         {'name': 'Link1', 'link': '/123'},
@@ -54,15 +59,15 @@ $(function() {
   $('body').html(app._html);
 
   setTimeout(function() {
-    update.nodes[1].name = 'PPP2';
-    update.nodes[0].items = [
+    update.nodes[2].name = 'PPP2';
+    update.nodes[1].items = [
       {'name': 'NewLink1', 'link': '/aaaaa1'},
       {'name': 'NewLink2', 'link': '/bbbbb2'},
       {'name': 'NewLink3', 'link': '/ccccc3'},
     ];
 
+    console.log('----- update');
     app.update(update, 100);
-    console.log('update');
   }, 2000);
 });
 

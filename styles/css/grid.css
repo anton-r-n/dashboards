@@ -1,0 +1,56 @@
+.grid {
+  position: relative;
+  left: 2%;
+}
+
+.grid .row {
+  clear: left;
+}
+
+.grid .row:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: '';
+  clear: both;
+  height: 0;
+  width: 0;
+}
+
+.grid .col-3,
+.grid .col-4,
+.grid .col-6,
+.grid .col-8,
+.grid .col-12,
+.grid .col-16,
+.grid .col-24 {
+  float: left;
+}
+
+.grid .col-3 {
+  width: 12%;
+}
+
+.grid .col-4 {
+  width: 16%;
+}
+
+.grid .col-6 {
+  width: 24%;
+}
+
+.grid .col-8 {
+  width: 32%;
+}
+
+.grid .col-12 {
+  width: 48%;
+}
+
+.grid .col-16 {
+  width: 64%;
+}
+
+.grid .col-24 {
+  width: 96%;
+}
