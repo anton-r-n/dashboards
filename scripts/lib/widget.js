@@ -27,6 +27,12 @@ Widget.prototype.update = function(data, width) {
   this._renderRecursively(data, width);
   var render = $.render(this._html);
   this._root.html('');
+
+  var attrs = render.attributes;
+  for (var i = 0; i < attrs.length; i++) {
+    this._root[0].setAttribute(attrs[i].name, attrs[i].value);
+  }
+
   while (render.firstChild) {
     this._root[0].appendChild(render.firstChild);
   }

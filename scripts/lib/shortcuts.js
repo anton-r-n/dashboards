@@ -39,7 +39,9 @@
 
   dom.prototype.html = function() {
     if (arguments.length > 0) {
-      this[0].innerHTML = arguments[0];
+      for (var i = 0; i < this.length; i++) {
+        this[i].innerHTML = arguments[0];
+      }
       return this;
     }
     else {
