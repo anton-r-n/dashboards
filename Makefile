@@ -27,18 +27,15 @@ JS_FILES = $(addprefix $(JS_DIR)/, $(JS_FILENAMES))
 
 
 all: css js
-	@echo "\nDone\n"
 
 css: $(CSS_DESTINATION)
 
 $(CSS_DESTINATION): $(CSS_FILES)
-	@echo "\nCombine css files"
 	cat $(foreach f, $(CSS_FILES), $f) > $(CSS_DESTINATION)
 
 js: $(JS_DESTINATION)
 
 $(JS_DESTINATION): $(JS_FILES)
-	@echo "\nCombine js files"
 	cat $(foreach f, $(JS_FILES), $f) > $(JS_DESTINATION)
 
 clean: clean_css clean_js

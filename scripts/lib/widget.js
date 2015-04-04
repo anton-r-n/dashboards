@@ -3,18 +3,18 @@
 
 
 /** @constructor */
-function Widget() {};
+function Widget() {}
 
 
 /**
  * Set initial state
  */
 Widget.prototype.init = function(id, data, width) {
-  this.id = id
+  this.id = id;
   this._renderRecursively(data, width);
 
   var self = this;
-  setTimeout(function() {self._root = $('[data-obj="' + self.id +'"]')}, 0);
+  setTimeout(function() {self._root = $('[data-obj="' + self.id + '"]')}, 0);
 
   return this;
 };

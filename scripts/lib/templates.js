@@ -29,22 +29,22 @@
    */
   function get_tpl(selector) {
     return document.querySelector('[data-tpl="' + selector + '"]') ||
-        (function () {
+        (function() {
           throw new Error('Template for "' + selector + '" does not exist.');
         })();
   }
 
   function compose(str) {
     var s = ("var p=[];p.push('" + str
-          .replace(/>\s*[\r\n\t]+\s*/mg, '>')
-          .replace(/\s*[\r\n\t]+\s*</mg, '<')
-          .replace(/\s*[\r\n\t]\s*/mg, ' ')
-          .replace(/<%/g, '\n')
-          .replace(/(.*%>)?(.*'.*)/g, apos)
-          .replace(/^:(.+)%>/mg, "',$1,'")
-          .replace(/^=(.+)%>/mg, "',$.esc($1),'")
-          .replace(/^(.+)%>/mg, "');$1p.push('")
-          .replace(/\n/g, '') + "');return p.join('');"
+        .replace(/>\s*[\r\n\t]+\s*/mg, '>')
+        .replace(/\s*[\r\n\t]+\s*</mg, '<')
+        .replace(/\s*[\r\n\t]\s*/mg, ' ')
+        .replace(/<%/g, '\n')
+        .replace(/(.*%>)?(.*'.*)/g, apos)
+        .replace(/^:(.+)%>/mg, "',$1,'")
+        .replace(/^=(.+)%>/mg, "',$.esc($1),'")
+        .replace(/^(.+)%>/mg, "');$1p.push('")
+        .replace(/\n/g, '') + "');return p.join('');"
         ).replace(/p.push\(''\);/g, '');
     return s;
   }

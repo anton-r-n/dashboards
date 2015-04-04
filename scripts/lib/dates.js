@@ -11,7 +11,7 @@
    * Format UTC date with time zone offset
    * @param {Object} date Date or timestamp in ms.
    * @param {Number} tzoffset Time zone fixed offset in hours default 0.
-   * @param {String} format Date format, default ISO. 
+   * @param {String} format Date format, default ISO.
    * @return {String} formatted date.
    */
   ns.tzformat = function(date, tzoffset, format) {

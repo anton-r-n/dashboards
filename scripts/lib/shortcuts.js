@@ -9,9 +9,9 @@
       loaded ? arg0() : onload.push(arg0);
     }
     else {
-      return new dom(document.querySelectorAll(arg0));
+      return new Dom(document.querySelectorAll(arg0));
     }
-  }
+  };
 
 
   /** Onload */
@@ -28,16 +28,16 @@
 
 
   /** DOM Selectors */
-  function dom(elts) {
+  function Dom(elts) {
     this.length = elts.length;
     for (var i = 0; i < elts.length; i++) {
       this[i] = elts[i];
     }
   }
 
-  dom.prototype = new Array();
+  Dom.prototype = new Array();
 
-  dom.prototype.html = function() {
+  Dom.prototype.html = function() {
     if (arguments.length > 0) {
       for (var i = 0; i < this.length; i++) {
         this[i].innerHTML = arguments[0];
@@ -45,7 +45,7 @@
       return this;
     }
     else {
-      return this.length > 0 ? this[0].innerHTML: '';
+      return this.length > 0 ? this[0].innerHTML : '';
     }
   };
 })();
