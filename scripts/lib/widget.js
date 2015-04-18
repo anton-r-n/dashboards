@@ -11,7 +11,13 @@ function Widget() {}
  */
 Widget.prototype.init = function(id, data, width) {
   this.id = id;
-  this._renderRecursively(data, width);
+  this.data = data;
+  this.type = data.type;
+  this.data.id = this.id;
+  this.width = width;
+
+  this.process();
+  this._renderRecursively(data, this.width);
 
   var self = this;
   setTimeout(function() {self._root = $('[data-obj="' + self.id + '"]')}, 0);
@@ -20,11 +26,20 @@ Widget.prototype.init = function(id, data, width) {
 };
 
 
+Widget.prototype.process = function() {};
+
+
 /**
  * Update
  */
 Widget.prototype.update = function(data, width) {
-  this._renderRecursively(data, width);
+  this.data = data;
+  this.type = data.type;
+  this.data.id = this.id;
+  this.width = width;
+
+  this.process();
+  this._renderRecursively(data, this.width);
   var render = $.render(this._html);
   this._root.html('');
 
@@ -46,14 +61,11 @@ Widget.prototype.destroy = function() {};
 
 
 Widget.prototype._renderRecursively = function(data, width) {
-  this.data = data;
-  this.type = data.type;
-  this.data.id = this.id;
 
-  console.log('render %s', this.id);
+  console.log('render %s', this.id, 'width', width);
 
   if (data.nodes && data.nodes.length) {
-    this.nodes = this._initNodes(data.nodes);
+    this.nodes = this._initNodes(data.nodes, width);
     this.data.content = this._collectContent(this.nodes);
   }
 
@@ -61,12 +73,12 @@ Widget.prototype._renderRecursively = function(data, width) {
 };
 
 
-Widget.prototype._initNodes = function(nodes) {
+Widget.prototype._initNodes = function(nodes, width) {
   var self = this;
   return nodes.map(function(item, idx) {
     var wid = self.id + '.' + item.type + idx;
     var widget = item.type in widgets ? new widgets[item.type] : new Widget;
-    return widget.init(wid, item);
+    return widget.init(wid, item, width);
   });
 };
 

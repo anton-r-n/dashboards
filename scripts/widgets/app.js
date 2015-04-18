@@ -5,24 +5,22 @@ var widgets = {};
 
 
 
-/** @constructor
-widgets.App = function() {};
-widgets.App.prototype = new Widget();
+/** @constructor */
+widgets.Column = function() {};
+widgets.Column.prototype = new Widget();
 
 
-widgets.App.prototype.init = function(id, data, width) {
-  this.tpl = 'App';
-  this.context = {};
-  this.context.menu = data.menu;
-  console.trace();
-  this._init(id, data, width);
-  return this;
+widgets.Column.prototype.process = function() {
+  this.width = this.width * this.data.width / 24;
 };
 
 
-widgets.App.prototype.update = function(data, width) {
-  this.context = {};
-  this.context.menu = data.menu;
-  this._update(data, width);
+
+/** @constructor */
+widgets.ChartLinear = function() {};
+widgets.ChartLinear.prototype = new Widget();
+
+
+widgets.ChartLinear.prototype.process = function() {
+  console.log('process Linear Chart');
 };
-*/

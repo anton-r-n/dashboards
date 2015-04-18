@@ -68,7 +68,14 @@
 
 <script data-tpl="Column" type="text/html">
   <div class="Column col-<%= _.width %>" data-obj="<%= _.id %>">
-    Column <%= _.id %>
+    <%: _.content %>
+  </div>
+</script>
+
+
+<script data-tpl="ChartLinear" type="text/html">
+  <div class="ChartLinear" data-obj="<%= _.id %>">
+    <%: _.content %>
   </div>
 </script>
 
