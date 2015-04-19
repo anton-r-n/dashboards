@@ -45,3 +45,6 @@ clean_css:
 
 clean_js:
 	rm -f $(JS_DESTINATION)
+
+lint:
+	gjslint --nojsdoc --strict -r $(JS_DIR)
