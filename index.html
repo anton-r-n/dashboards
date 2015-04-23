@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="./styles/css/reset.css" />
 <link rel="stylesheet" href="./styles/css/grid.css" />
 <link rel="stylesheet" href="./styles/css/header.css" />
+<link rel="stylesheet" href="./styles/css/chart_linear.css" />
 
 <script src="./scripts/lib/shortcuts.js"></script>
 <script src="./scripts/lib/templates.js"></script>
@@ -15,6 +16,7 @@
 <script src="./scripts/lib/widget.js"></script>
 
 <script src="./scripts/widgets/app.js"></script>
+<script src="./scripts/widgets/chart_linear.js"></script>
 
 <script src="./scripts/init.js"></script>
 
@@ -51,7 +53,9 @@
 
 <script data-tpl="Page" type="text/html">
   <div class="Page" data-obj="<%= _.id %>">
-    Page <%= _.id %> <%= _.name %>
+    <div class="PageHeader">
+      Page <%= _.id %> <%= _.name %>
+    </div>
     <div class="grid">
       <%: _.content %>
     </div>
@@ -75,8 +79,54 @@
 
 <script data-tpl="ChartLinear" type="text/html">
   <div class="ChartLinear" data-obj="<%= _.id %>">
-    <%: _.content %>
+    <div class="header">
+      <h3><%= _.name %></h3>
+    </div>
+    <div class="body">
+      <svg xmlns="http://www.w3.org/2000/svg"
+          class="SVGChart" viewBox="<%: _.viewBox %>">
+        <g class="axes">
+          <% for (type in _.axes) if (type !== 'bottom') { %>
+            <%: $.tpl('axis', _.axes[type]) %>
+          <% } %>
+          <% if ('bottom' in _.axes) { %>
+            <%: $.tpl('axis', _.axes['bottom']) %>
+          <% } %>
+        </g>
+        <g class="curves" transform="translate(<%: _.data_translate %>)">
+          <% for (type in _.data) { %>
+            <%: $.tpl('curves', _.data[type]) %>
+          <% } %>
+        </g>
+      </svg>
+    </div>
   </div>
+</script>
+
+
+<script data-tpl="axis" type="text/html">
+  <g class="axis axis-<%: _.type%>" transform="translate(<%: _.translate %>)">
+    <g class="ticks">
+      <% for (var i = 0; i < _.ticks.length; i++) { %>
+        <g transform="translate(<%: _.ticks[i].xy %>)">
+          <line class="tick-line"
+            x2="<%: _.tick_line.x2 %>" y2="<%: _.tick_line.y2 %>" />
+          <text class="tick-text"
+            dx="<%: _.ticks[i].dx %>" dy="<%: _.ticks[i].dy %>">
+            <%= _.ticks[i].str %>
+          </text>
+        </g>
+      <% } %>
+    </g>
+    <line class="axis-line" x2="<%: _.line.x2 %>" y2="<%: _.line.y2 %>" />
+  </g>
+</script>
+
+
+<script data-tpl="curves" type="text/html">
+  <% for (var i = 0; i < _.length; i++) { %>
+    <path class="curve curve_<%: i %>" d="<%: _[i] %>" />
+  <% } %>
 </script>
 
 </head>

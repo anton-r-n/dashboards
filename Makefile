@@ -10,6 +10,7 @@ CSS_FILENAMES = \
 	reset.css \
 	grid.css \
 	header.css \
+	chart_linear.css \
 
 JS_FILENAMES = \
 	lib/shortcuts.js \
@@ -19,6 +20,7 @@ JS_FILENAMES = \
 	lib/widget.js \
 	\
 	widgets/app.js \
+	widgets/chart_linear.js \
 	\
 	init.js \
 
@@ -47,4 +49,4 @@ clean_js:
 	rm -f $(JS_DESTINATION)
 
 lint:
-	gjslint --nojsdoc --strict -r $(JS_DIR)
+	gjslint --nojsdoc --strict $(JS_FILES)

@@ -4,4 +4,13 @@
   padding: 0 2%;
   line-height: 3em;
   background-color: #555;
+  font-weight: 400;
+}
+
+
+.PageHeader {
+  margin-top: .5rem;
+  padding: .1rem 2%;
+  font-size: 120%;
+  font-weight: 400;
 }
