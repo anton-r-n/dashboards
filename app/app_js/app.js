@@ -28,17 +28,6 @@ widgets.Page.prototype.process = function(model) {
 
 
 /** @constructor */
-widgets.Menu = function() {};
-widgets.Menu.prototype = new Widget();
-
-
-widgets.Menu.prototype.process = function(model) {
-  return {items: model.items};
-};
-
-
-
-/** @constructor */
 widgets.Column = function() {};
 widgets.Column.prototype = new Widget();
 

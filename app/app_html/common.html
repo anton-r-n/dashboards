@@ -1,0 +1,40 @@
+<script data-tpl="App" type="text/html">
+  <div class="App" data-obj="<%= _.id %>">
+    <%: _.content %>
+  </div>
+</script>
+
+
+<script data-tpl="Header" type="text/html">
+  <header class="Header" data-obj="<%= _.id %>">
+    <%= _.text %>
+  </header>
+</script>
+
+
+
+
+<script data-tpl="Page" type="text/html">
+  <div class="Page" data-obj="<%= _.id %>">
+    <div class="PageHeader">
+      Page <%= _.id %> <%= _.name %>
+    </div>
+    <div class="grid">
+      <%: _.content %>
+    </div>
+  </div>
+</script>
+
+
+<script data-tpl="Panel" type="text/html">
+  <div class="Panel row" data-obj="<%= _.id %>">
+    <%: _.content %>
+  </div>
+</script>
+
+
+<script data-tpl="Column" type="text/html">
+  <div class="Column col-<%= _.cols %>" data-obj="<%= _.id %>">
+    <%: _.content %>
+  </div>
+</script>

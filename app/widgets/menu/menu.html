@@ -1,0 +1,14 @@
+<script data-tpl="Menu" type="text/html">
+  <div class="Menu" data-obj="<%= _.id %>">
+    Menu
+    <ul>
+      <% for (var i = 0; i < _.items.length; i++) { %>
+        <li>
+          <a href="<%: _.items[i].link %>">
+            <%= _.items[i].name %>
+          </a>
+        </li>
+      <% } %>
+    </ul>
+  </div>
+</script>

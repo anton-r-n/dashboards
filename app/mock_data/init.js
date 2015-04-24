@@ -5,7 +5,7 @@ var data = {
   'nodes': [
     {
       'type': 'Header',
-      'text': 'Header Text',
+      'text': 'Header Text'
     },
 
     {
@@ -156,7 +156,7 @@ var data = {
       'items': [
         {'name': 'Link1', 'link': '/123'},
         {'name': 'Link2', 'link': '/124'},
-        {'name': 'Link3', 'link': '/125'},
+        {'name': 'Link3', 'link': '/125'}
       ]
     }
   ]
@@ -175,7 +175,7 @@ $(function() {
     update.nodes[2].items = [
       {'name': 'NewLink1', 'link': '/aaaaa1'},
       {'name': 'NewLink2', 'link': '/bbbbb2'},
-      {'name': 'NewLink3', 'link': '/ccccc3'},
+      {'name': 'NewLink3', 'link': '/ccccc3'}
     ];
 
     console.log('----- update');

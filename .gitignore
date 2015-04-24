@@ -1,6 +1,9 @@
 *min.js
 *min.css
 
+debug/
+release/
+
 .DS_Store
 .AppleDouble
 .LSOverride
