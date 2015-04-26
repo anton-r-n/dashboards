@@ -102,6 +102,7 @@ $(function() {
   var app = new Widget().init('App', data, width);
   $('body').html(app._html);
 
+  /*
   setTimeout(function() {
     update.nodes[1].name = 'PPP3';
     update.nodes[2].items = [
@@ -113,6 +114,8 @@ $(function() {
     console.log('----- update');
     app.update(update, width);
   }, 2000);
+  */
+
 });
 
 console.log('Ok');
