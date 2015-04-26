@@ -29,8 +29,8 @@ JS_FILES := \
 	app/widgets/menu/menu.js \
 	app/mock_data/init.js \
 
-LINK_STRING = '<link rel="stylesheet" href="%s" />\n'
-SCRIPT_STRING = '<script src="%s"></script>\n'
+LINK_STRING := '<link rel="stylesheet" href="%s" />\n'
+SCRIPT_STRING := '<script src="%s"></script>\n'
 
 .PHONY: all debug release clean lint
 

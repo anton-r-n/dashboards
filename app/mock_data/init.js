@@ -25,7 +25,7 @@ function mock_linear_chart_data() {
         ]
       ]
     }
-  }
+  };
 }
 
 var data = {
