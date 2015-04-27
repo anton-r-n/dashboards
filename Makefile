@@ -8,6 +8,7 @@ RELEASE_JS := $(RELEASE_DIR)/min.js
 
 HTML_FILES := \
 	app/app_html/common.html \
+	app/widgets/bar_chart/bar_chart.html \
 	app/widgets/chart_linear/chart_linear.html \
 	app/widgets/menu/menu.html \
 	
@@ -15,6 +16,7 @@ CSS_FILES := \
 	app/app_css/reset.css \
 	app/app_css/grid.css \
 	app/app_css/header.css \
+	app/widgets/bar_chart/bar_chart.css \
 	app/widgets/chart_linear/chart_linear.css \
 	app/widgets/menu/menu.css \
 
@@ -25,6 +27,7 @@ JS_FILES := \
 	app/app_js/templates.js \
 	app/app_js/widget.js \
 	app/app_js/app.js \
+	app/widgets/bar_chart/bar_chart.js \
 	app/widgets/chart_linear/chart_linear.js \
 	app/widgets/menu/menu.js \
 	app/mock_data/init.js \

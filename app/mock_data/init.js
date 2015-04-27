@@ -1,5 +1,6 @@
 'use strict';
 
+
 function mock_linear_chart_data() {
   return {
     'type': 'ChartLinear',
@@ -27,6 +28,15 @@ function mock_linear_chart_data() {
     }
   };
 }
+
+
+function mock_bar_chart() {
+  return {
+    'type': 'BarChart',
+    'name': 'Distribution',
+  };
+}
+
 
 var data = {
   'type': 'App',
@@ -75,7 +85,7 @@ var data = {
               'type': 'Column',
               'cols': 12,
               'nodes': [
-                mock_linear_chart_data()
+                mock_bar_chart()
               ]
             }
           ]
