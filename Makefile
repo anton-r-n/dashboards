@@ -17,6 +17,7 @@ CSS_FILES := \
 	app/app_css/grid.css \
 	app/app_css/header.css \
 	app/app_css/widget.css \
+	app/app_css/chart.css \
 	app/widgets/bar_chart/bar_chart.css \
 	app/widgets/linear_chart/linear_chart.css \
 	app/widgets/menu/menu.css \
