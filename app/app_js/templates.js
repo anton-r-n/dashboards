@@ -17,7 +17,7 @@
    */
   ns.tpl = function(str, data) {
     var fn = !/\W/.test(str) ?
-        cache[str] = cache[str] || ns.tpl(get_tpl(str).innerHTML) :
+        cache[str] = cache[str] || ns.tpl(get_source(str).innerHTML) :
         new Function('_', compose(str));
     return arguments.length > 1 ? fn(data) : fn;
   };
@@ -27,7 +27,7 @@
    * @param {String} Selector selector name.
    * @return {Object} DOMNode.
    */
-  function get_tpl(selector) {
+  function get_source(selector) {
     return document.querySelector('[data-tpl="' + selector + '"]') ||
         (function() {
           throw new Error('Template for "' + selector + '" does not exist.');
