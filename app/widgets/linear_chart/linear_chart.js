@@ -3,11 +3,11 @@
 
 
 /** @constructor */
-widgets.ChartLinear = function() {};
-widgets.ChartLinear.prototype = new Widget();
+widgets.LinearChart = function() {};
+widgets.LinearChart.prototype = new Widget();
 
 
-widgets.ChartLinear.prototype.process = function(model) {
+widgets.LinearChart.prototype.process = function(model) {
   console.log('process Linear Chart');
 
   var view = {};
@@ -32,7 +32,7 @@ widgets.ChartLinear.prototype.process = function(model) {
 };
 
 
-widgets.ChartLinear.prototype._buildAxes = function(model) {
+widgets.LinearChart.prototype._buildAxes = function(model) {
   var axes = {};
   for (var type in model.axes) {
     if (type in model.data) {
@@ -45,7 +45,7 @@ widgets.ChartLinear.prototype._buildAxes = function(model) {
 };
 
 
-widgets.ChartLinear.prototype._buildAxisLeft = function(_axis) {
+widgets.LinearChart.prototype._buildAxisLeft = function(_axis) {
   var axis = {'min': _axis.min, 'max': _axis.max, 'type': 'left'};
   var margin = this.margin,
       width = this.geom.width - margin.left - margin.right;
@@ -72,7 +72,7 @@ widgets.ChartLinear.prototype._buildAxisLeft = function(_axis) {
 };
 
 
-widgets.ChartLinear.prototype._buildAxisBottom = function(_axis) {
+widgets.LinearChart.prototype._buildAxisBottom = function(_axis) {
   var axis = {'min': _axis.start, 'type': 'bottom'};
   var margin = this.margin,
       width = this.geom.width - margin.left - margin.right;
@@ -103,7 +103,7 @@ widgets.ChartLinear.prototype._buildAxisBottom = function(_axis) {
 };
 
 
-widgets.ChartLinear.prototype._scaleData = function(data, axis, x_axis) {
+widgets.LinearChart.prototype._scaleData = function(data, axis, x_axis) {
   var d = [], current;
   for (var i = 0; i < data.length; i++) {
     var curve = ['M'], x, y;
@@ -121,7 +121,7 @@ widgets.ChartLinear.prototype._scaleData = function(data, axis, x_axis) {
 };
 
 
-widgets.ChartLinear.prototype._updateMinMax = function(data, axis) {
+widgets.LinearChart.prototype._updateMinMax = function(data, axis) {
   var current,
       max = Number.NEGATIVE_INFINITY,
       min = Number.POSITIVE_INFINITY;

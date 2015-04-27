@@ -3,7 +3,7 @@
 
 function mock_linear_chart_data() {
   return {
-    'type': 'ChartLinear',
+    'type': 'LinearChart',
     'name': 'Average CPU Load',
     'axes': {
       'bottom': {
