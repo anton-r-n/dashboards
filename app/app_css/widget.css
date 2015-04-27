@@ -1,0 +1,11 @@
+.Widget {
+  margin-bottom: .5rem;
+}
+
+.Widget .header {
+  padding: .1rem 0;
+}
+
+.Widget .header h3 {
+  font-weight: 400;
+}
