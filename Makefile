@@ -28,6 +28,7 @@ JS_FILES := \
 	app/app_js/numbers.js \
 	app/app_js/templates.js \
 	app/app_js/widget.js \
+	app/app_js/chart.js \
 	app/app_js/app.js \
 	app/widgets/bar_chart/bar_chart.js \
 	app/widgets/linear_chart/linear_chart.js \

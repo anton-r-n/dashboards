@@ -1,9 +1,6 @@
 'use strict';
 
 
-var widgets = {};
-
-
 
 /** @constructor */
 widgets.Header = function() {};
