@@ -1,10 +1,10 @@
-DEBUG_DIR := ./debug
-DEBUG_HTML := $(DEBUG_DIR)/index.html
+DEV_DIR := ./dev
+DEV_HTML := $(DEV_DIR)/index.html
 
-RELEASE_DIR := ./release
-RELEASE_HTML := $(RELEASE_DIR)/index.html
-RELEASE_CSS := $(RELEASE_DIR)/min.css
-RELEASE_JS := $(RELEASE_DIR)/min.js
+PROD_DIR := ./prod
+PROD_HTML := $(PROD_DIR)/index.html
+PROD_CSS := $(PROD_DIR)/min.css
+PROD_JS := $(PROD_DIR)/min.js
 
 HTML_FILES := \
 	app/app_html/common.html \
@@ -42,35 +42,41 @@ SCRIPT_STRING := '<script src="%s"></script>\n'
 
 all: debug release
 
-debug: $(DEBUG_HTML)
+debug: $(DEV_DIR) $(DEV_HTML)
 
-$(DEBUG_HTML): $(HTML_FILES) $(CSS_FILES) $(JS_FILES)
+$(DEV_DIR):
+	@mkdir -p $@
+
+$(DEV_HTML): $(HTML_FILES) $(CSS_FILES) $(JS_FILES)
 	@cat ./app/app_html/header.html > $@
 	@printf $(LINK_STRING) $(foreach f, $(CSS_FILES), ../$f) >> $@
 	@printf $(SCRIPT_STRING) $(foreach f, $(JS_FILES), ../$f) >> $@
 	@for f in $(HTML_FILES); do echo '\n' >> $@; cat $$f >> $@; done
 	@echo 'Done:' $@
 
-release: $(RELEASE_HTML) $(RELEASE_CSS) $(RELEASE_JS)
+release: $(PROD_DIR) $(PROD_HTML) $(PROD_CSS) $(PROD_JS)
 
-$(RELEASE_HTML): $(HTML_FILES) $(CSS_FILES) $(JS_FILES)
+$(PROD_DIR):
+	@mkdir -p $@
+
+$(PROD_HTML): $(HTML_FILES) $(CSS_FILES) $(JS_FILES)
 	@cat ./app/app_html/header.html > $@
 	@printf $(LINK_STRING) './min.css' >> $@
 	@printf $(SCRIPT_STRING) './min.js' >> $@
 	@for f in $(HTML_FILES); do echo '\n' >> $@; cat $$f >> $@; done
 	@echo 'Done:' $@
 
-$(RELEASE_CSS): $(CSS_FILES)
+$(PROD_CSS): $(CSS_FILES)
 	@cat $(foreach f, $^, $f) > $@
 	@echo 'Done:' $@
 
-$(RELEASE_JS): $(JS_FILES)
+$(PROD_JS): $(JS_FILES)
 	@echo "'use strict';" > $@
 	@cat $(foreach f, $^, $f) | sed -e "s/^'use strict';//g" >> $@
 	@echo 'Done:' $@
 
 clean:
-	rm -f $(DEBUG_HTML) $(RELEASE_HTML) $(RELEASE_JS) $(RELEASE_CSS)
+	rm -rf $(DEV_DIR) $(PROD_DIR)
 
 lint:
 	gjslint --nojsdoc --strict $(JS_FILES)

@@ -1,8 +1,8 @@
 *min.js
 *min.css
 
-debug/
-release/
+dev/
+prod/
 
 .DS_Store
 .AppleDouble
