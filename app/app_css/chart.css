@@ -23,12 +23,12 @@
   stroke: #ccc;
 }
 
-.SVGChart .axis-left .axis-line {
+.SVGChart .axis-left .axis-line,
+.SVGChart .axis-right .axis-line {
   display: none;
 }
 
 .SVGChart .axis-bottom .tick-line {
-  /* display: none; */
 }
 
 .SVGChart .axis-left .tick-text {

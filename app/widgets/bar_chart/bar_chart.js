@@ -4,7 +4,7 @@
 
 /** @constructor */
 widgets.BarChart = function() {};
-widgets.BarChart.prototype = new Widget();
+widgets.BarChart.prototype = new widgets.Chart();
 
 
 widgets.BarChart.prototype.process = function(model) {
@@ -18,5 +18,6 @@ widgets.BarChart.prototype.process = function(model) {
 
   view.name = model.name;
   view.viewBox = [0, 0, this.geom.width, this.geom.height].join(' ');
+  view.axes = this._buildAxes(model);
   return view;
 };

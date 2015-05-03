@@ -73,7 +73,12 @@ widgets.Chart.prototype._buildAxisLeft = function(_axis) {
 
 
 widgets.Chart.prototype._buildAxisBottom = function(_axis) {
-  var axis = {'min': _axis.start, 'type': 'bottom'};
+  var axis = {
+    'ticks': [],
+    'type': 'bottom',
+    'translate': '0,0',
+    'line': {'x2': 0, 'y2': 0}
+  };
   return axis;
 };
 
