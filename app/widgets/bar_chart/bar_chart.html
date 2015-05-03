@@ -14,11 +14,11 @@
             <%: $.tpl('axis', _.axes['bottom']) %>
           <% } %>
         </g>
-        <!-- g class="curves" transform="translate(<%: _.data_translate %>)">
+        <g class="curves" transform="translate(<%: _.data_translate %>)">
           <% for (type in _.data) { %>
             <%: $.tpl('curves', _.data[type]) %>
           <% } %>
-        </g -->
+        </g>
       </svg>
     </div>
   </div>

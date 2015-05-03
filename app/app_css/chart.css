@@ -47,16 +47,20 @@
 
 .SVGChart .curve_0 {
   stroke: #1f77b4;
+  fill: #1f77b4;
 }
 
 .SVGChart .curve_1 {
   stroke: #ff7f0e;
+  fill: #ff7f0e;
 }
 
 .SVGChart .curve_3 {
   stroke: #2ca02c;
+  fill: #2ca02c;
 }
 
 .SVGChart .curve_4 {
   stroke: #d62728;
+  fill: #d62728;
 }
