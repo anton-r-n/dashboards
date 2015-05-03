@@ -37,3 +37,21 @@ widgets.LinearChart.prototype._buildAxisBottom = function(_axis) {
   }
   return axis;
 };
+
+
+widgets.LinearChart.prototype._scaleData = function(data, axis, x_axis) {
+  var d = [], current;
+  for (var i = 0; i < data.length; i++) {
+    var curve = ['M'], x, y;
+    for (var j = 0; j < data[i].length; j++) {
+      current = data[i][j];
+      if (typeof current === 'number') {
+        x = Math.round(x_axis.step * j / x_axis.scale);
+        y = this.chart_height - Math.round((current - axis.min) / axis.scale);
+        curve.push(x + ',' + y);
+      }
+    }
+    d.push(curve.join(' '));
+  }
+  return d;
+};
