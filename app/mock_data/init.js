@@ -8,7 +8,8 @@ function mock_linear_chart_data() {
     'axes': {
       'bottom': {
         'start': 1429658166000, 'step': 60000, 'length': 50},
-      'left': {'min': 0, 'max': 100, 'tick': 28}
+      'left': {'min': 0, 'max': 100, 'tick': 25},
+      'right': {'min': 0, 'max': 150, 'tick': 25}
     },
     'data': {
       'left': [
@@ -24,6 +25,14 @@ function mock_linear_chart_data() {
           59, 19, 41, 49, 95, 100, 92, 66, 26, 30, 27, 81, 10,
           90, 3, 11, 63, 11, 10, 51, 49, 68, 79
         ]
+      ],
+      'right': [
+        [
+          26, 47, 13, 53, 71, 82, 95, 93, 82, 80, 72, 76, 69, 57,
+          51, 49, 45, 38, 37, 39, 49, 59, 61, 77, 87, 78, 62, 48,
+          44, 39, 42, 57, 62, 42, 30, 48, 56, 69, 75, 82, 81, 74,
+          71, 63, 60, 56, 50, 57, 54, 47, 40
+        ]
       ]
     }
   };
@@ -38,7 +47,7 @@ function mock_bar_chart() {
       'bottom': {
           'cols': ['Jan', 'Feb', 'Mar', 'Apr', 'May']
         },
-      'left': {'min': 0, 'max': 100, 'tick': 28}
+      'left': {'min': 0, 'max': 100, 'tick': 25}
     },
     'data': {
       'left': [

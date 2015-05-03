@@ -15,10 +15,11 @@ widgets.Chart.prototype.process = function(model) {
   this.margin = {'top': 5, 'right': 50, 'bottom': 20, 'left': 50};
   this.geom = {'width': this.width, 'height': 150};
   this.chart_height = this.geom.height - this.margin.bottom - this.margin.top;
+  this.chart_width = this.geom.width - this.margin.left - this.margin.right;
 
   view.name = model.name;
   view.viewBox = [0, 0, this.geom.width, this.geom.height].join(' ');
-  view.axes = this._buildAxes(model);
+  view.axes = this._axes(model);
 
   view.data = {};
   view.data_translate = [this.margin.left, this.margin.top].join(', ');
@@ -32,59 +33,77 @@ widgets.Chart.prototype.process = function(model) {
 };
 
 
-widgets.Chart.prototype._buildAxes = function(model) {
+widgets.Chart.prototype._axes = function(model) {
   var axes = {};
   for (var type in model.axes) {
     if (type in model.data) {
       this._updateMinMax(model.data[type], model.axes[type]);
     }
-    var method = '_buildAxis' + type.charAt(0).toUpperCase() + type.slice(1);
+    var method = '_axis' + type.charAt(0).toUpperCase() + type.slice(1);
     axes[type] = this[method](model.axes[type]);
   }
   return axes;
 };
 
 
-widgets.Chart.prototype._buildAxisLeft = function(_axis) {
-  var axis = {'min': _axis.min, 'max': _axis.max, 'type': 'left'};
-  var margin = this.margin,
-      width = this.geom.width - margin.left - margin.right;
+widgets.Chart.prototype._axisVertical = function(_axis, axis) {
+  axis.min = _axis.min;
+  axis.max = _axis.max;
 
-  var max = Math.max(_axis.max, _axis._max * 1.05),
-      min = Math.min(_axis.min, _axis._min * 1.05);
+  var max = Math.max(_axis.max, _axis._max),
+      min = Math.min(_axis.min, _axis._min);
 
   axis.scale = (max - min) / this.chart_height;
-  axis.translate = [margin.left, margin.top].join(',');
-  axis.line = {'x2': 0, 'y2': this.chart_height};
-  axis.tick_line = {'x2': width, 'y2': 0};
 
   axis.ticks = [];
   var step = _axis.tick;
   for (var v = min; v <= max; v += step) {
     axis.ticks.push({
-      'dx': '-.7em',
-      'dy': '.3em',
       'xy': [0, Math.round((max - v) / axis.scale)].join(','),
       'str': $.humanize(v)
     });
   }
-  return axis;
 };
 
 
-widgets.Chart.prototype._buildAxisBottom = function(_axis) {
+widgets.Chart.prototype._axisLeft = function(_axis) {
   var axis = {
-    'ticks': [],
-    'type': 'bottom',
-    'translate': '0,0',
-    'line': {'x2': 0, 'y2': 0}
+    'type': 'left',
+    'translate': [this.margin.left, this.margin.top].join(','),
+    'line': {'x2': 0, 'y2': this.chart_height},
+    'tick_line': {'x2': this.chart_width, 'y2': 0},
+    'tick_dx': '-.7em',
+    'tick_dy': '.3em',
   };
+  this._axisVertical(_axis, axis);
   return axis;
 };
 
 
-widgets.Chart.prototype._scaleData = function(data, axis, x_axis) {
-  return [];
+widgets.Chart.prototype._axisRight = function(_axis) {
+  var axis = {
+    'type': 'right',
+    'translate': [this.margin.left + this.chart_width, this.margin.top].join(','),
+    'line': {'x2': 0, 'y2': this.chart_height},
+    'tick_line': {'x2': 5, 'y2': 0},
+    'tick_dx': '.7em',
+    'tick_dy': '.3em',
+  };
+  this._axisVertical(_axis, axis);
+  return axis;
+};
+
+
+widgets.Chart.prototype._axisBottomCommon = function(_axis) {
+  var axis = {'type': 'bottom'};
+  axis.translate = [
+    this.margin.left, this.geom.height - this.margin.bottom].join(',');
+  axis.line = {'x2': this.chart_width, 'y2': 0};
+  axis.tick_line = {'x2': 0, 'y2': -this.chart_height};
+  axis.tick_dx = '0';
+  axis.tick_dy = '1.4em';
+  axis.ticks = [];
+  return axis;
 };
 
 

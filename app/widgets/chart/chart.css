@@ -35,6 +35,10 @@
   text-anchor: end;
 }
 
+.svg_chart .axis-right .tick-text {
+  text-anchor: start;
+}
+
 .svg_chart .axis-bottom .tick-text {
   text-anchor: middle;
 }
