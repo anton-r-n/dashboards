@@ -8,6 +8,7 @@ PROD_JS := $(PROD_DIR)/min.js
 
 HTML_FILES := \
 	app/app_html/common.html \
+	app/widgets/chart/chart.html \
 	app/widgets/bar_chart/bar_chart.html \
 	app/widgets/linear_chart/linear_chart.html \
 	app/widgets/menu/menu.html \
@@ -17,7 +18,7 @@ CSS_FILES := \
 	app/app_css/grid.css \
 	app/app_css/header.css \
 	app/app_css/widget.css \
-	app/app_css/chart.css \
+	app/widgets/chart/chart.css \
 	app/widgets/bar_chart/bar_chart.css \
 	app/widgets/linear_chart/linear_chart.css \
 	app/widgets/menu/menu.css \
@@ -28,8 +29,8 @@ JS_FILES := \
 	app/app_js/numbers.js \
 	app/app_js/templates.js \
 	app/app_js/widget.js \
-	app/app_js/chart.js \
 	app/app_js/app.js \
+	app/widgets/chart/chart.js \
 	app/widgets/bar_chart/bar_chart.js \
 	app/widgets/linear_chart/linear_chart.js \
 	app/widgets/menu/menu.js \

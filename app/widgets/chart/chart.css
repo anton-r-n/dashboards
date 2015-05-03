@@ -1,4 +1,4 @@
-.SVGChart {
+.svg_chart {
   width: 100%;
   height: 100%;
   display: block;
@@ -6,61 +6,61 @@
   font-size: inherit;
 }
 
-.SVGChart .axis {
+.svg_chart .axis {
   font-size: 80%;
 }
 
-.SVGChart .axis line {
+.svg_chart .axis line {
   stroke-width: 1;
   shape-rendering: crispedges;
 }
 
-.SVGChart .axis line.axis-line {
+.svg_chart .axis line.axis-line {
   stroke: #333;
 }
 
-.SVGChart .axis line.tick-line {
+.svg_chart .axis line.tick-line {
   stroke: #ccc;
 }
 
-.SVGChart .axis-left .axis-line,
-.SVGChart .axis-right .axis-line {
+.svg_chart .axis-left .axis-line,
+.svg_chart .axis-right .axis-line {
   display: none;
 }
 
-.SVGChart .axis-bottom .tick-line {
+.svg_chart .axis-bottom .tick-line {
 }
 
-.SVGChart .axis-left .tick-text {
+.svg_chart .axis-left .tick-text {
   text-anchor: end;
 }
 
-.SVGChart .axis-bottom .tick-text {
+.svg_chart .axis-bottom .tick-text {
   text-anchor: middle;
 }
 
-.SVGChart .curve {
+.svg_chart .curve {
   stroke: #f00;
   stroke-width: 1;
   fill: none;
 }
 
-.SVGChart .curve_0 {
+.svg_chart .curve_0 {
   stroke: #1f77b4;
   fill: #1f77b4;
 }
 
-.SVGChart .curve_1 {
+.svg_chart .curve_1 {
   stroke: #ff7f0e;
   fill: #ff7f0e;
 }
 
-.SVGChart .curve_3 {
+.svg_chart .curve_3 {
   stroke: #2ca02c;
   fill: #2ca02c;
 }
 
-.SVGChart .curve_4 {
+.svg_chart .curve_4 {
   stroke: #d62728;
   fill: #d62728;
 }

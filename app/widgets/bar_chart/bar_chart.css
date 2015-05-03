@@ -1,3 +1,7 @@
-.BarChart .SVGChart .curve {
+.BarChart .svg_chart .curve {
   stroke-width: 0;
+}
+
+.BarChart .svg_chart .axis-bottom .tick-line {
+  display: none;
 }

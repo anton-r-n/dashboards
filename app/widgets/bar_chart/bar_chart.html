@@ -3,23 +3,6 @@
     <div class="header">
       <h3><%= _.name %></h3>
     </div>
-    <div class="body">
-      <svg xmlns="http://www.w3.org/2000/svg"
-          class="SVGChart" viewBox="<%: _.viewBox %>">
-        <g class="axes">
-          <% for (type in _.axes) if (type !== 'bottom') { %>
-            <%: $.tpl('axis', _.axes[type]) %>
-          <% } %>
-          <% if ('bottom' in _.axes) { %>
-            <%: $.tpl('axis', _.axes['bottom']) %>
-          <% } %>
-        </g>
-        <g class="curves" transform="translate(<%: _.data_translate %>)">
-          <% for (type in _.data) { %>
-            <%: $.tpl('curves', _.data[type]) %>
-          <% } %>
-        </g>
-      </svg>
-    </div>
+    <%: $.tpl('chart', _) %>
   </div>
 </script>
