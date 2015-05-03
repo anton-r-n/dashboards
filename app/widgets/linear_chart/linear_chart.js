@@ -7,23 +7,25 @@ widgets.LinearChart = function() {};
 widgets.LinearChart.prototype = new widgets.Chart();
 
 widgets.LinearChart.prototype._buildAxisBottom = function(_axis) {
-  var axis = {'min': _axis.start, 'type': 'bottom'};
+  var axis = {'type': 'bottom'};
   var margin = this.margin,
-      width = this.geom.width - margin.left - margin.right;
+      axis_width = this.geom.width - margin.left - margin.right;
 
-  axis.max = _axis.start + _axis.step * _axis.length;
-  axis.scale = (axis.max - axis.min) / width;
   axis.translate = [margin.left, this.geom.height - margin.bottom].join(',');
-  axis.line = {'x2': width, 'y2': 0};
+  axis.line = {'x2': axis_width, 'y2': 0};
   axis.tick_line = {'x2': 0, 'y2': -this.chart_height};
+  axis.ticks = [];
+
+  axis.min = _axis.start;
+  axis.max = _axis.start + _axis.step * _axis.length;
+  axis.scale = (axis.max - axis.min) / axis_width;
   axis.step = _axis.step;
 
-  axis.ticks = [];
   var tick_width = 100;
   var step_width = _axis.step / axis.scale,
       step = Math.round(tick_width / step_width) * step_width;
 
-  for (var i = 0; i <= width; i += step) {
+  for (var i = 0; i <= axis_width; i += step) {
     var current = axis.min + i * axis.scale;
     axis.ticks.push({
       'dx': '0',
