@@ -63,18 +63,12 @@ function mock_pie_chart() {
   return {
     'type': 'PieChart',
     'name': 'Distribution Pie Chart',
-    'axes': {
-      'bottom': {
-        'cols': ['Jan', 'Feb', 'Mar', 'Apr', 'May']
-      },
-      'left': {'min': 0, 'max': 100, 'tick': 25}
-    },
-    'data': {
-      'left': [
-        [66, 67, 12, 33, 11],
-        [22, 45, 33, 2, 30],
-      ]
-    }
+    'max': 100,
+    'cols': ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+    'data': [
+      [10, 25, 12, 33, 11],
+      [22, 25, 13, 2, 20],
+    ]
   };
 }
 

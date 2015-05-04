@@ -3,5 +3,19 @@
     <div class="header">
       <h3><%= _.name %></h3>
     </div>
+    <div class="chart_body">
+      <svg xmlns="http://www.w3.org/2000/svg"
+          class="pie_chart" viewBox="<%: _.viewBox %>"
+          width="<%: _.size %>px" height="<%: _.size %>px">
+        <g class="curves" transform="translate(<%: _.translate %>)">
+          <circle class="pie_border" r="<%: _.radius %>" />
+          <% for (var i = 0; i < _.rows.length; i++) { %>
+            <% for (var j = 0; j < _.rows[i].length; j++) { %>
+              <path class="curve curve_<%: j %>" d="<%: _.rows[i][j] %>" />
+            <% } %>
+          <% } %>
+        </g>
+      </svg>
+    </div>
   </div>
 </script>
