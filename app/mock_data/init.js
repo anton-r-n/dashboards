@@ -45,8 +45,8 @@ function mock_bar_chart() {
     'name': 'Distribution',
     'axes': {
       'bottom': {
-          'cols': ['Jan', 'Feb', 'Mar', 'Apr', 'May']
-        },
+        'cols': ['Jan', 'Feb', 'Mar', 'Apr', 'May']
+      },
       'left': {'min': 0, 'max': 100, 'tick': 25}
     },
     'data': {

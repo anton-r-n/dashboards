@@ -12,8 +12,9 @@ widgets.Chart.prototype.process = function(model) {
 
   var view = {};
 
-  this.margin = {'top': 5, 'right': 50, 'bottom': 20, 'left': 50};
   this.geom = {'width': this.width, 'height': 150};
+  this.margin = {'top': 5, 'right': 50, 'bottom': 20, 'left': 50};
+
   this.chart_height = this.geom.height - this.margin.bottom - this.margin.top;
   this.chart_width = this.geom.width - this.margin.left - this.margin.right;
 
@@ -83,7 +84,8 @@ widgets.Chart.prototype._axisLeft = function(_axis) {
 widgets.Chart.prototype._axisRight = function(_axis) {
   var axis = {
     'type': 'right',
-    'translate': [this.margin.left + this.chart_width, this.margin.top].join(','),
+    'translate': [
+      this.margin.left + this.chart_width, this.margin.top].join(','),
     'line': {'x2': 0, 'y2': this.chart_height},
     'tick_line': {'x2': 5, 'y2': 0},
     'tick_dx': '.7em',

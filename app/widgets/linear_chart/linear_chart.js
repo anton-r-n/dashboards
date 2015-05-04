@@ -7,7 +7,7 @@ widgets.LinearChart = function() {};
 widgets.LinearChart.prototype = new widgets.Chart();
 
 widgets.LinearChart.prototype._axisBottom = function(_axis) {
-  var axis =  this._axisBottomCommon(_axis);
+  var axis = this._axisBottomCommon(_axis);
   axis.min = _axis.start;
   axis.max = _axis.start + _axis.step * _axis.length;
   axis.scale = (axis.max - axis.min) / this.chart_width;

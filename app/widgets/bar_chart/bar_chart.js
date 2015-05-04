@@ -8,7 +8,7 @@ widgets.BarChart.prototype = new widgets.Chart();
 
 
 widgets.BarChart.prototype._axisBottom = function(_axis) {
-  var axis =  this._axisBottomCommon(_axis);
+  var axis = this._axisBottomCommon(_axis);
 
   this.step = this.chart_width / _axis.cols.length;
 
