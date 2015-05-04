@@ -11,6 +11,7 @@ HTML_FILES := \
 	app/widgets/chart/chart.html \
 	app/widgets/bar_chart/bar_chart.html \
 	app/widgets/linear_chart/linear_chart.html \
+	app/widgets/pie_chart/pie_chart.html \
 	app/widgets/menu/menu.html \
 	
 CSS_FILES := \
@@ -21,6 +22,7 @@ CSS_FILES := \
 	app/widgets/chart/chart.css \
 	app/widgets/bar_chart/bar_chart.css \
 	app/widgets/linear_chart/linear_chart.css \
+	app/widgets/pie_chart/pie_chart.css \
 	app/widgets/menu/menu.css \
 
 JS_FILES := \
@@ -33,6 +35,7 @@ JS_FILES := \
 	app/widgets/chart/chart.js \
 	app/widgets/bar_chart/bar_chart.js \
 	app/widgets/linear_chart/linear_chart.js \
+	app/widgets/pie_chart/pie_chart.js \
 	app/widgets/menu/menu.js \
 	app/mock_data/init.js \
 

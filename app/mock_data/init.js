@@ -1,7 +1,7 @@
 'use strict';
 
 
-function mock_linear_chart_data() {
+function mock_linear_chart() {
   return {
     'type': 'LinearChart',
     'name': 'Average CPU Load',
@@ -42,7 +42,27 @@ function mock_linear_chart_data() {
 function mock_bar_chart() {
   return {
     'type': 'BarChart',
-    'name': 'Distribution',
+    'name': 'Distribution Bar Chart',
+    'axes': {
+      'bottom': {
+        'cols': ['Jan', 'Feb', 'Mar', 'Apr', 'May']
+      },
+      'left': {'min': 0, 'max': 100, 'tick': 25}
+    },
+    'data': {
+      'left': [
+        [66, 67, 12, 33, 11],
+        [22, 45, 33, 2, 30],
+      ]
+    }
+  };
+}
+
+
+function mock_pie_chart() {
+  return {
+    'type': 'PieChart',
+    'name': 'Distribution Pie Chart',
     'axes': {
       'bottom': {
         'cols': ['Jan', 'Feb', 'Mar', 'Apr', 'May']
@@ -78,7 +98,7 @@ var data = {
               'type': 'Column',
               'cols': 12,
               'nodes': [
-                mock_linear_chart_data()
+                mock_linear_chart()
               ]
             },
 
@@ -86,7 +106,7 @@ var data = {
               'type': 'Column',
               'cols': 12,
               'nodes': [
-                mock_linear_chart_data()
+                mock_linear_chart()
               ]
             }
           ]
@@ -98,7 +118,7 @@ var data = {
               'type': 'Column',
               'cols': 12,
               'nodes': [
-                mock_linear_chart_data()
+                mock_pie_chart()
               ]
             },
 
