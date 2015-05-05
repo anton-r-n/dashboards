@@ -1,3 +1,4 @@
 .LinearChart .svg_chart .curve {
+  stroke-width: 1;
   fill: none;
 }

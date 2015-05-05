@@ -2,6 +2,7 @@
   display: block;
   cursor: default;
   font-size: inherit;
+  margin: 0 auto;
 }
 
 .PieChart .pie_border {

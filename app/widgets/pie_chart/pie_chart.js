@@ -1,6 +1,7 @@
 'use strict';
 
 
+
 /** @constructor */
 widgets.PieChart = function() {};
 widgets.PieChart.prototype = new Widget();
