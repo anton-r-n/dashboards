@@ -16,6 +16,7 @@ HTML_FILES := \
 	
 CSS_FILES := \
 	app/app_css/reset.css \
+	app/app_css/colors.css \
 	app/app_css/grid.css \
 	app/app_css/header.css \
 	app/app_css/widget.css \

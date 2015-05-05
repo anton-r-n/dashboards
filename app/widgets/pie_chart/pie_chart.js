@@ -20,6 +20,7 @@ widgets.PieChart.prototype.process = function(model) {
   view.size = 2 * outer_radius;
   view.viewBox = [0, 0, view.size, view.size].join(' ');
   view.translate = [radius + 1, radius + 1].join(', ');
+  view.rotate = -90;
 
   this.max = this._total(model.data, model.max);
 
@@ -32,7 +33,6 @@ widgets.PieChart.prototype.process = function(model) {
       view.rows.push(this._row(model.data[i], r1, r2));
     }
   }
-  console.log('--', view.rows);
 
   return view;
 };
@@ -64,8 +64,8 @@ widgets.PieChart.prototype._row = function(data_row, r1, r2) {
 widgets.PieChart.prototype._segment = function(start, end, r1, r2) {
   var diff = start !== end && (end - start) % 360 === 0 ? .1 : 0;
 
-  end = (end % 360) - 90;
-  start = (start % 360) - 90;
+  end = (end % 360);
+  start = (start % 360);
   end -= diff;
   if (start > end) { start -= 360 }
 

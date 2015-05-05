@@ -10,8 +10,8 @@
           <%: $.tpl('axis', _.axes['bottom']) %>
         <% } %>
       </g>
-      <g class="curves" transform="translate(<%: _.data_translate %>)">
-        <% for (type in _.data) { %>
+      <g class="Colors curves" transform="translate(<%: _.data_translate %>)">
+        <% for (var type in _.data) { %>
           <%: $.tpl('curves', _.data[type]) %>
         <% } %>
       </g>
@@ -41,6 +41,6 @@
 
 <script data-tpl="curves" type="text/html">
   <% for (var i = 0; i < _.length; i++) { %>
-    <path class="curve curve_<%: i %>" d="<%: _[i] %>" />
+    <path class="curve color_<%: i %>" d="<%: _[i] %>" />
   <% } %>
 </script>
