@@ -13,6 +13,7 @@ function Widget() {}
  */
 Widget.prototype.init = function(id, model, width) {
   this.id = id;
+  this.nodes = [];
   this._render(model, width);
   this._findRootNode();
   return this;
@@ -24,6 +25,7 @@ Widget.prototype.init = function(id, model, width) {
  */
 Widget.prototype.update = function(model, width) {
   this._render(model, width);
+  this._destroyChildNodes();
   this._updateRootNode();
 };
 
@@ -31,7 +33,10 @@ Widget.prototype.update = function(model, width) {
 /**
  * Destroy
  */
-Widget.prototype.destroy = function() {};
+Widget.prototype.destroy = function() {
+  console.log('-- destroy %s', this.id);
+  this._destroyChildNodes();
+};
 
 
 Widget.prototype.process = function(model) {
@@ -92,4 +97,10 @@ Widget.prototype._initNodes = function(nodes, width) {
 
 Widget.prototype._collectContent = function(nodes) {
   return nodes.map(function(item) {return item._html}).join('');
+};
+
+Widget.prototype._destroyChildNodes = function() {
+  for (var i = 0; i < this.nodes.length; i++) {
+    this.nodes[i].destroy();
+  }
 };
