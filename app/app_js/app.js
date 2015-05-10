@@ -30,6 +30,5 @@ widgets.Column.prototype = new Widget();
 
 
 widgets.Column.prototype.process = function(model) {
-  this.width = Math.round(this.width * model.cols / 24);
   return {cols: model.cols};
 };

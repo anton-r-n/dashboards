@@ -11,10 +11,11 @@ function Widget() {}
 /**
  * Set initial state
  */
-Widget.prototype.init = function(id, model, width) {
+Widget.prototype.init = function(id, model) {
   this.id = id;
   this.nodes = [];
-  this._render(model, width);
+  this.model = model;
+  this._render(model);
   this._findRootNode();
   return this;
 };
@@ -23,9 +24,10 @@ Widget.prototype.init = function(id, model, width) {
 /**
  * Update
  */
-Widget.prototype.update = function(model, width) {
-  this._render(model, width);
+Widget.prototype.update = function(model) {
+  this.model = model;
   this._destroyChildNodes();
+  this._render(model);
   this._updateRootNode();
 };
 
@@ -65,32 +67,31 @@ Widget.prototype._updateRootNode = function() {
 };
 
 
-Widget.prototype._render = function(model, width) {
-  this.width = width;
+Widget.prototype._render = function(model) {
   this.view = this.process(model);
   this.view.id = this.id;
-  this._renderRecursively(model, this.width);
+  this._renderRecursively(model);
 };
 
 
-Widget.prototype._renderRecursively = function(model, width) {
+Widget.prototype._renderRecursively = function(model) {
 
-  console.log('render %s', this.id, 'width', width);
+  console.log('render %s', this.id, 'width', model._width);
 
   if (model.nodes && model.nodes.length) {
-    this.nodes = this._initNodes(model.nodes, width);
+    this.nodes = this._initNodes(model.nodes);
     this.view.content = this._collectContent(this.nodes);
   }
   this._html = $.tpl(model.type, this.view);
 };
 
 
-Widget.prototype._initNodes = function(nodes, width) {
+Widget.prototype._initNodes = function(nodes) {
   var self = this;
   return nodes.map(function(item, idx) {
     var wid = self.id + '.' + item.type + idx;
     var widget = item.type in widgets ? new widgets[item.type] : new Widget;
-    return widget.init(wid, item, width);
+    return widget.init(wid, item);
   });
 };
 
