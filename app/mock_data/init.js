@@ -164,10 +164,11 @@ $(function() {
 
   var width = Math.round(window.innerWidth * 0.96);
 
+  console.time('init');
   var app = new Widget().init('App', data, width);
   $('body').html(app._html);
+  setTimeout(function() {console.timeEnd('init')}, 0);
 
-  /*
   setTimeout(function() {
     update.nodes[1].name = 'PPP3';
     update.nodes[2].items = [
@@ -175,11 +176,12 @@ $(function() {
       {'name': 'NewLink2', 'link': '/bbbbb2'},
       {'name': 'NewLink3', 'link': '/ccccc3'}
     ];
+    var width = Math.round(window.innerWidth * 0.96);
 
-    console.log('----- update');
+    console.time('update');
     app.update(update, width);
+    setTimeout(function() {console.timeEnd('update')}, 0);
   }, 2000);
-  */
 
 });
 
