@@ -16,7 +16,10 @@ Widget.prototype.init = function(id, model) {
   this.nodes = [];
   this.model = model;
   this._render(model);
-  this._findRootNode();
+  setTimeout((function() {
+    this._findRootNode();
+    this.addEvents();
+  }).bind(this), 0);
   return this;
 };
 
@@ -46,9 +49,11 @@ Widget.prototype.process = function(model) {
 };
 
 
+Widget.prototype.addEvents = function() {};
+
+
 Widget.prototype._findRootNode = function() {
-  var self = this;
-  setTimeout(function() {self._root = $('[data-obj="' + self.id + '"]')}, 0);
+  this._root = $('[data-obj="' + this.id + '"]');
 };
 
 

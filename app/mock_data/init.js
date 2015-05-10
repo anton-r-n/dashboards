@@ -160,27 +160,11 @@ var data = {
 };
 
 
-/* Recursively calculate width of elements */
-function update_node_width(data, width) {
-  data._width = data.type === 'Column' ?
-      Math.round(width * data.cols / 24) : width;
-  if (data.nodes && data.nodes.length) {
-    for (var i = 0; i < data.nodes.length; i++) {
-      update_node_width(data.nodes[i], data._width);
-    }
-  }
-}
-
-
 $(function() {
   var update = JSON.parse(JSON.stringify(data));
 
-  var width = Math.round(window.innerWidth * 0.96);
-
-  update_node_width(data, width);
-
   console.time('init');
-  var app = new Widget().init('App', data);
+  var app = new widgets.App().init('App', data);
   $('body').html(app._html);
   setTimeout(function() {console.timeEnd('init')}, 0);
 
@@ -191,8 +175,6 @@ $(function() {
       {'name': 'NewLink2', 'link': '/bbbbb2'},
       {'name': 'NewLink3', 'link': '/ccccc3'}
     ];
-    var width = Math.round(window.innerWidth * 0.96);
-    update_node_width(update, width);
 
     console.time('update');
     app.update(update);
