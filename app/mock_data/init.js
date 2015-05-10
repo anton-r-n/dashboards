@@ -1,45 +1,63 @@
 'use strict';
 
 
+function random(min, max, prev) {
+  if (typeof prev === 'undefined') {
+    prev = (max - min) * Math.random().toFixed(2);
+  }
+  var next = prev + (max - min) * .1 * (.5 - Math.random()).toFixed(2);
+  return Math.max(min, Math.min(max, next));
+}
+
+
+function random_series(min, max, length) {
+  var arr = [];
+  for (var i = 0; i <= length; i++) {
+    arr[i] = random(min, max, arr[i - 1]);
+  }
+  return arr;
+}
+
+function random_values(min, max, arr) {
+  for (var i = 0; i < arr.length; i++) {
+    arr[i] = random(min, max, arr[i - 1]);
+  }
+  return arr;
+}
+
+
 function mock_linear_chart() {
+  var length = 50,
+      min0 = 0,
+      max0 = 100,
+      min1 = 0,
+      max1 = 150;
   return {
     'type': 'LinearChart',
     'name': 'Average CPU Load',
     'axes': {
       'bottom': {
-        'start': 1429658166000, 'step': 60000, 'length': 50},
-      'left': {'min': 0, 'max': 100, 'tick': 25},
-      'right': {'min': 0, 'max': 150, 'tick': 25}
+        'start': 1429658166000, 'step': 60000, 'length': length},
+      'left': {'min': min0, 'max': max0, 'tick': 25},
+      'right': {'min': min1, 'max': max1, 'tick': 25}
     },
     'data': {
       'left': [
-        [
-          66, 67, 12, 33, 11, 22, 45, 33, 2, 30, 52, 46, 39, 17,
-          21, 79, 95, 38, 17, 59, 79, 79, 21, 77, 47, 88, 12, 58,
-          54, 9, 92, 67, 12, 52, 20, 38, 86, 99, 45, 42, 91, 64,
-          31, 73, 80, 86, 90, 47, 84, 77, 80
-        ],
-        [
-          20, 14, 53, 98, 15, 23, 36, 85, 14, 3, 79, 74, 36, 30,
-          54, 28, 31, 16, 43, 94, 1, 57, 73, 32, 51, 21, 24, 94,
-          59, 19, 41, 49, 95, 100, 92, 66, 26, 30, 27, 81, 10,
-          90, 3, 11, 63, 11, 10, 51, 49, 68, 79
-        ]
+        random_series(min0, max0, length),
+        random_series(min0, max0, length),
       ],
       'right': [
-        [
-          26, 47, 13, 53, 71, 82, 95, 93, 82, 80, 72, 76, 69, 57,
-          51, 49, 45, 38, 37, 39, 49, 59, 61, 77, 87, 78, 62, 48,
-          44, 39, 42, 57, 62, 42, 30, 48, 56, 69, 75, 82, 81, 74,
-          71, 63, 60, 56, 50, 57, 54, 47, 40
-        ]
-      ]
+        random_series(min1, max1, length),
+      ],
     }
   };
 }
 
 
 function mock_bar_chart() {
+  var length = 5,
+      min0 = 0,
+      max0 = 100;
   return {
     'type': 'BarChart',
     'name': 'Distribution Bar Chart',
@@ -47,12 +65,13 @@ function mock_bar_chart() {
       'bottom': {
         'cols': ['Jan', 'Feb', 'Mar', 'Apr', 'May']
       },
-      'left': {'min': 0, 'max': 100, 'tick': 25}
+      'left': {'min': min0, 'max': max0, 'tick': 25}
     },
     'data': {
       'left': [
-        [66, 67, 12, 33, 11],
-        [22, 45, 33, 2, 30],
+        random_values(min0, max0, new Array(length)),
+        random_values(min0, max0, new Array(length)),
+        random_values(min0, max0, new Array(length))
       ]
     }
   };
