@@ -4,15 +4,15 @@
         class="svg_chart" viewBox="<%: _.viewBox %>">
       <g class="axes">
         <% for (type in _.axes) if (type !== 'bottom') { %>
-          <%: $.tpl('axis', _.axes[type]) %>
+          <%: $.tpl('chart_axis', _.axes[type]) %>
         <% } %>
         <% if ('bottom' in _.axes) { %>
-          <%: $.tpl('axis', _.axes['bottom']) %>
+          <%: $.tpl('chart_axis', _.axes['bottom']) %>
         <% } %>
       </g>
       <g class="Colors curves" transform="translate(<%: _.data_translate %>)">
         <% for (var type in _.data) { %>
-          <%: $.tpl('curves', _.data[type]) %>
+          <%: $.tpl('chart_curves', _.data[type]) %>
         <% } %>
       </g>
     </svg>
@@ -20,7 +20,7 @@
 </script>
 
 
-<script data-tpl="axis" type="text/html">
+<script data-tpl="chart_axis" type="text/html">
   <g class="axis axis-<%: _.type%>" transform="translate(<%: _.translate %>)">
     <g class="ticks">
       <% for (var i = 0; i < _.ticks.length; i++) { %>
@@ -39,7 +39,7 @@
 </script>
 
 
-<script data-tpl="curves" type="text/html">
+<script data-tpl="chart_curves" type="text/html">
   <% for (var i = 0; i < _.length; i++) { %>
     <path class="curve color_<%: i %>" d="<%: _[i] %>" />
   <% } %>
