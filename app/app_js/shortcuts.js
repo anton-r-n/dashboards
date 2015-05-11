@@ -63,12 +63,12 @@
 
   var widow_events = {};
   function get_events_dict(elt) {
-      return elt === window ? widow_events : elt._events = elt._events || {};
+    return elt === window ? widow_events : elt._events = elt._events || {};
   }
 
   Dom.prototype.on = function(evt, handler) {
     for (var i = 0; i < this.length; i++) {
-      this[i].addEventListener(evt.split('.', 1), handler, false);
+      this[i].addEventListener(evt.split('.', 1), handler);
       var _events = get_events_dict(this[i]);
       _events[evt] = _events[evt] || [];
       _events[evt].push(handler);
@@ -79,8 +79,8 @@
     for (var i = 0; i < this.length; i++) {
       var _events = get_events_dict(this[i]);
       if (evt in _events) {
-        for (var i = 0; i <  _events[evt].length; i++) {
-          this[i].removeEventListener(evt.split('.', 1), _events[evt][i], false);
+        for (var i = 0; i < _events[evt].length; i++) {
+          this[i].removeEventListener(evt.split('.', 1), _events[evt][i]);
         }
         delete _events[evt];
       }
