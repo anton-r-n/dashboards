@@ -1,7 +1,7 @@
 <script data-tpl="chart" type="text/html">
   <div class="chart_body">
     <svg xmlns="http://www.w3.org/2000/svg"
-        class="svg_chart" viewBox="<%: _.viewBox %>">
+        class="svg_chart" width="<%: _.width %>px" height="<%: _.height %>px">
       <g class="axes">
         <% for (type in _.axes) if (type !== 'bottom') { %>
           <%: $.tpl('chart_axis', _.axes[type]) %>

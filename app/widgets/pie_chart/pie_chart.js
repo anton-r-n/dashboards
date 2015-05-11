@@ -19,7 +19,6 @@ widgets.PieChart.prototype.process = function(model) {
   view.name = model.name;
   view.radius = radius;
   view.size = 2 * outer_radius;
-  view.viewBox = [0, 0, view.size, view.size].join(' ');
   view.translate = [radius + 1, radius + 1].join(', ');
   view.rotate = -90;
 

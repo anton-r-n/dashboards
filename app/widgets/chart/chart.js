@@ -32,7 +32,8 @@ widgets.Chart.prototype.process = function(model) {
   this.chart_width = this.geom.width - this.margin.left - this.margin.right;
 
   view.name = model.name;
-  view.viewBox = [0, 0, this.geom.width, this.geom.height].join(' ');
+  view.width = this.geom.width;
+  view.height = this.geom.height;
   view.axes = this._axes(model);
 
   view.data = {};
