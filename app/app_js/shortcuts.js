@@ -9,7 +9,19 @@
       loaded ? arg0() : onload.push(arg0);
     }
     else {
-      return new Dom(document.querySelectorAll(arg0));
+      if (typeof(arg0) === 'string') {
+        return new Dom(document.querySelectorAll(arg0));
+      }
+      if (typeof(arg0) === 'object') {
+        if (arg0 instanceof String) {
+          return new Dom(document.querySelectorAll(arg0));
+        }
+        if (arg0 === window ||
+            arg0 instanceof HTMLDocument ||
+            arg0 instanceof HTMLElement) {
+          return new Dom([arg0]);
+        }
+      }
     }
   };
 
