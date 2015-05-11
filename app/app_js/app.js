@@ -19,7 +19,12 @@ widgets.App.prototype._get_width = function() {
 
 
 widgets.App.prototype.addEvents = function() {
-  window.addEventListener('resize', this.updateWidth.bind(this));
+  $(window).on('resize.' + this.id, this.updateWidth.bind(this));
+};
+
+
+widgets.App.prototype.removeEvents = function() {
+  $(window).off('resize.' + this.id);
 };
 
 
