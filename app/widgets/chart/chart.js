@@ -7,16 +7,8 @@ widgets.Chart = function() {};
 widgets.Chart.prototype = new Widget();
 
 
-widgets.Chart.prototype.addEvents = function() {
-  var self = this;
-  $(window).on('resize.' + this.id, function() {
-    self.update(self.model);
-  });
-};
-
-
-widgets.Chart.prototype.removeEvents = function() {
-  $(window).off('resize.' + this.id);
+widgets.Chart.prototype.update_on_resize = function() {
+  this.update(this.model);
 };
 
 

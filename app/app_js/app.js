@@ -8,8 +8,13 @@ widgets.App.prototype = new Widget();
 
 
 widgets.App.prototype.process = function() {
-  this.updateWidth();
+  widgets.App._model_width(this.model, this._get_width());
   return {};
+};
+
+
+widgets.App.prototype._get_width = function() {
+  return Math.round(window.innerWidth * 0.96);
 };
 
 
@@ -19,18 +24,31 @@ widgets.App.prototype.addEvents = function() {
 
 
 widgets.App.prototype.updateWidth = function() {
-  var width = Math.round(window.innerWidth * 0.96);
-  widgets.App.update_width(this.model, width);
+  widgets.App._model_width(this.model, this._get_width());
+  widgets.App._nodes_width(this);
 };
 
 
 /** staticmethod */
-widgets.App.update_width = function(model, width) {
+widgets.App._model_width = function(model, width) {
   model._width = model.type === 'Column' ?
       Math.round(width * model.cols / 24) : width;
   if (model.nodes && model.nodes.length) {
     for (var i = 0; i < model.nodes.length; i++) {
-      widgets.App.update_width(model.nodes[i], model._width);
+      widgets.App._model_width(model.nodes[i], model._width);
+    }
+  }
+};
+
+
+/** staticmethod */
+widgets.App._nodes_width = function(node) {
+  if (node.update_on_resize) {
+    node.update_on_resize();
+  }
+  if (node.nodes && node.nodes.length) {
+    for (var i = 0; i < node.nodes.length; i++) {
+      widgets.App._nodes_width(node.nodes[i]);
     }
   }
 };
