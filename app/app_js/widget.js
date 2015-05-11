@@ -41,6 +41,7 @@ Widget.prototype.update = function(model) {
 Widget.prototype.destroy = function() {
   console.log('-- destroy %s', this.id);
   this._destroyChildNodes();
+  this.removeEvents();
 };
 
 
@@ -50,6 +51,9 @@ Widget.prototype.process = function(model) {
 
 
 Widget.prototype.addEvents = function() {};
+
+
+Widget.prototype.removeEvents = function() {};
 
 
 Widget.prototype._findRootNode = function() {
