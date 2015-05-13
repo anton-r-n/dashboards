@@ -44,11 +44,11 @@ function mock_linear_chart() {
     'data': {
       'left': [
         random_series(min0, max0, length),
-        random_series(min0, max0, length),
+        random_series(min0, max0, length)
       ],
       'right': [
-        random_series(min1, max1, length),
-      ],
+        random_series(min1, max1, length)
+      ]
     }
   };
 }
@@ -87,7 +87,7 @@ function mock_pie_chart() {
     'data': [
       [10, 25, 12, 33, 11],
       [22, 25, 13, 2, 20],
-      [12, 15, 23, 17, 20],
+      [12, 15, 23, 17, 20]
     ]
   };
 }

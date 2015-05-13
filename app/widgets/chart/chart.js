@@ -80,7 +80,7 @@ widgets.Chart.prototype._axisLeft = function(_axis) {
     'line': {'x2': 0, 'y2': this.chart_height},
     'tick_line': {'x2': this.chart_width, 'y2': 0},
     'tick_dx': '-.7em',
-    'tick_dy': '.3em',
+    'tick_dy': '.3em'
   };
   this._axisVertical(_axis, axis);
   return axis;
@@ -95,7 +95,7 @@ widgets.Chart.prototype._axisRight = function(_axis) {
     'line': {'x2': 0, 'y2': this.chart_height},
     'tick_line': {'x2': 5, 'y2': 0},
     'tick_dx': '.7em',
-    'tick_dy': '.3em',
+    'tick_dy': '.3em'
   };
   this._axisVertical(_axis, axis);
   return axis;
