@@ -168,6 +168,7 @@ $(function() {
   $('body').html(app._html);
   setTimeout(function() {console.timeEnd('init')}, 0);
 
+  /*
   setTimeout(function() {
     update.nodes[1].name = 'PPP3';
     update.nodes[2].items = [
@@ -180,6 +181,7 @@ $(function() {
     app.update(update);
     setTimeout(function() {console.timeEnd('update')}, 0);
   }, 2000);
+  */
 
 });
 
