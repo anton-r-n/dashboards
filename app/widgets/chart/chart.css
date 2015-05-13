@@ -42,3 +42,7 @@
 .svg_chart .axis-bottom .tick-text {
   text-anchor: middle;
 }
+
+.Widget.hover {
+  background-color: #f99;
+}
