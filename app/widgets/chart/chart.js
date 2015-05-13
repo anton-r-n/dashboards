@@ -13,26 +13,21 @@ widgets.Chart.prototype.update_on_resize = function() {
 
 
 widgets.Chart.prototype.addEvents = function() {
-  this._root.on('mousemove', this.mousemove.bind(this));
-  this._root.on('mouseout', this.mouseout.bind(this));
+  //this._root.on('mousemove', this.mousemove.bind(this));
+  this._root.on('mouseleave', this.mouseleave.bind(this));
+  this._root.on('mouseenter', this.mouseenter.bind(this));
 };
 
 
-widgets.Chart.prototype.mousemove = function(e) {
-  if (!this.hover) {
-    this._root.addClass('hover');
-    this.hover = true;
-  }
-  // console.log(e);
+widgets.Chart.prototype.mouseenter = function(e) {
+  this._root.addClass('hover');
+  this.hover = true;
 };
 
 
-widgets.Chart.prototype.mouseout = function(e) {
-  if (!this._root[0].contains(e.target)) {
-    this._root.removeClass('hover');
-    this.hover = false;
-  }
-  // console.log('mouseout', e);
+widgets.Chart.prototype.mouseleave = function(e) {
+  this._root.removeClass('hover');
+  this.hover = false;
 };
 
 
