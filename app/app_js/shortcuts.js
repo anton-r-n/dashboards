@@ -38,6 +38,9 @@
     }
   });
 
+  Array.prototype.diff = function(a) {
+    return this.filter(function(i) {return a.indexOf(i) < 0;});
+  };
 
   /** DOM Selectors */
   function Dom(elts) {
@@ -73,6 +76,7 @@
       _events[evt] = _events[evt] || [];
       _events[evt].push(handler);
     }
+    return this;
   };
 
   Dom.prototype.off = function(evt) {
@@ -85,5 +89,21 @@
         delete _events[evt];
       }
     }
+    return this;
+  };
+
+  Dom.prototype.addClass = function(name) {
+    for (var i = 0; i < this.length; i++) {
+      this[i].className = $.unify(this[i].className + ' ' + name);
+    }
+    return this;
+  };
+
+  Dom.prototype.removeClass = function(name) {
+    var dels = name.split(/\s+/);
+    for (var i = 0; i < this.length; i++) {
+      this[i].className = this[i].className.split(/\s+/).diff(dels).join(' ');
+    }
+    return this;
   };
 })();
