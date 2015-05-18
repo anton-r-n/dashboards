@@ -8,7 +8,8 @@ widgets.App.prototype = new Widget();
 
 
 widgets.App.prototype.process = function() {
-  widgets.App._model_width(this.model, this._get_width());
+  this.width = this._get_width();
+  widgets.App._model_width(this.model, this.width);
   return {};
 };
 
@@ -29,8 +30,12 @@ widgets.App.prototype.removeEvents = function() {
 
 
 widgets.App.prototype.updateWidth = function() {
-  widgets.App._model_width(this.model, this._get_width());
-  widgets.App._nodes_width(this);
+  var width = this._get_width();
+  if (this.width !== width) {
+    this.width = width;
+    widgets.App._model_width(this.model, this._get_width());
+    widgets.App._nodes_width(this);
+  }
 };
 
 
