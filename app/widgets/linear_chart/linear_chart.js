@@ -45,3 +45,92 @@ widgets.LinearChart.prototype._scaleData = function(data, axis, x_axis) {
   }
   return d;
 };
+
+
+widgets.LinearChart.prototype.addEvents = function() {
+  this._root.on('mouseleave', this.mouseleave.bind(this));
+  this._root.on('mouseenter', this.mouseenter.bind(this));
+};
+
+
+widgets.LinearChart.prototype.mouseenter = function(e) {
+  this._body = this._root.find('.chart_body').off('mousemove');
+  this._body.on('mousemove', this.mousemove.bind(this));
+  this._highlight = this._root.find('.highlight');
+  this._idx = -1;
+};
+
+
+widgets.LinearChart.prototype._getRectangle = function(elt) {
+  var rect = this._body[0].getBoundingClientRect();
+  return {
+    'left': rect.left + this.margin.left,
+    'top': rect.top + this.margin.top,
+    'right': rect.left + this.margin.left + this.chart_width,
+    'bottom': rect.top + this.margin.top + this.chart_height
+  };
+};
+
+
+widgets.LinearChart.prototype.mouseleave = function(e) {
+  this._body.off('mousemove');
+};
+
+
+widgets.LinearChart.prototype.mousemove = function(e) {
+  var rect = this._body[0].getBoundingClientRect(),
+      ex = e.clientX - rect.left - this.margin.left,
+      ey = e.clientY - rect.top - this.margin.top,
+      scale = this.view.axes.bottom.scale,
+      step = this.model.axes.bottom.step,
+      values = {},
+      idx = -1;
+
+  if (ex > 0 && ex < this.chart_width && ey > 0 && ey < this.chart_height) {
+    var idx = Math.round(ex * scale / step);
+    for (var axis in this.model.axes) {
+      if (axis in this.model.data) {
+        values[axis] = this._values(idx, axis);
+      }
+    }
+  }
+
+  if (this._idx !== idx) {
+    this._idx = idx;
+    this._updateHighlight(ey, idx, values);
+  }
+};
+
+
+widgets.LinearChart.prototype._values = function(idx, axis) {
+  var values = [],
+      data = this.model.data[axis];
+  for (var i = 0; i < data.length; i++) {
+    values.push({value: $.humanize(data[i][idx]), name: '---'});
+  }
+  return values;
+};
+
+
+widgets.LinearChart.prototype._updateHighlight = function(ey, idx, values) {
+  if (idx === -1) {
+    this._highlight.html('');
+    return;
+  }
+
+  var scale = this.view.axes.bottom.scale,
+      step = this.model.axes.bottom.step,
+      x = Math.round(idx * step / scale) + this.margin.left,
+      side = x > this.geom.width / 2 ? 'right' : 'left';
+
+  this._highlight.html(
+      $.tpl('chart_highlight',
+      {
+        y: ey - 20,
+        x: x,
+        side: side,
+        top: this.margin.top,
+        height: this.chart_height,
+        values: values
+      }));
+};

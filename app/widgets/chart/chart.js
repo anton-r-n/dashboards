@@ -12,25 +12,6 @@ widgets.Chart.prototype.update_on_resize = function() {
 };
 
 
-widgets.Chart.prototype.addEvents = function() {
-  //this._root.on('mousemove', this.mousemove.bind(this));
-  this._root.on('mouseleave', this.mouseleave.bind(this));
-  this._root.on('mouseenter', this.mouseenter.bind(this));
-};
-
-
-widgets.Chart.prototype.mouseenter = function(e) {
-  this._root.addClass('hover');
-  this.hover = true;
-};
-
-
-widgets.Chart.prototype.mouseleave = function(e) {
-  this._root.removeClass('hover');
-  this.hover = false;
-};
-
-
 widgets.Chart.prototype.process = function(model) {
   console.log('process ' + model.type);
 
@@ -124,9 +105,9 @@ widgets.Chart.prototype._axisRight = function(_axis) {
 widgets.Chart.prototype._axisBottomCommon = function(_axis) {
   var axis = {'type': 'bottom'};
   axis.translate = [
-    this.margin.left, this.geom.height - this.margin.bottom].join(',');
+    this.margin.left + .5, this.geom.height - this.margin.bottom].join(',');
   axis.line = {'x2': this.chart_width, 'y2': 0};
-  axis.tick_line = {'x2': 0, 'y2': -this.chart_height};
+  axis.tick_line = {'x2': 0, 'y2': 5};
   axis.tick_dx = '0';
   axis.tick_dy = '1.4em';
   axis.ticks = [];

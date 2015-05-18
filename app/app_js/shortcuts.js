@@ -52,6 +52,17 @@
 
   Dom.prototype = new Array();
 
+  Dom.prototype.find = function(selector) {
+    var elts = [];
+    for (var i = 0; i < this.length; i++) {
+      var nodes = this[i].querySelectorAll(selector);
+      for (var j = 0; j < nodes.length; j++) {
+        elts.push(nodes[j]);
+      }
+    }
+    return new Dom(elts);
+  };
+
   Dom.prototype.html = function() {
     if (arguments.length > 0) {
       for (var i = 0; i < this.length; i++) {
@@ -83,8 +94,8 @@
     for (var i = 0; i < this.length; i++) {
       var _events = get_events_dict(this[i]);
       if (evt in _events) {
-        for (var i = 0; i < _events[evt].length; i++) {
-          this[i].removeEventListener(evt.split('.', 1), _events[evt][i]);
+        for (var j = 0; j < _events[evt].length; j++) {
+          this[i].removeEventListener(evt.split('.', 1), _events[evt][j]);
         }
         delete _events[evt];
       }

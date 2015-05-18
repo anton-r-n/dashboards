@@ -27,7 +27,7 @@ function random_values(min, max, arr) {
 
 
 function mock_linear_chart() {
-  var length = 50,
+  var length = 100,
       min0 = 0,
       max0 = 100,
       min1 = 0,
