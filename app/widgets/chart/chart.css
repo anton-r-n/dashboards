@@ -84,3 +84,12 @@
 .chart_body .highlight .values.right {
   right: 1em;
 }
+
+.chart_body .highlight .bullet {
+  position: absolute;
+  top: 0;
+  left: -3px;
+  border-radius: 50%;
+  width: 7px;
+  height: 7px;
+}

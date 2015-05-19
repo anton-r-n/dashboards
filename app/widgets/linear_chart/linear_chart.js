@@ -104,9 +104,15 @@ widgets.LinearChart.prototype.mousemove = function(e) {
 
 widgets.LinearChart.prototype._values = function(idx, axis) {
   var values = [],
-      data = this.model.data[axis];
+      data = this.model.data[axis],
+      ax = this.view.axes[axis];
   for (var i = 0; i < data.length; i++) {
-    values.push({value: $.humanize(data[i][idx]), name: '---'});
+    var current = data[i][idx];
+    values.push({
+      value: $.humanize(current),
+      name: i,
+      y: this.chart_height - Math.round((current - ax.min) / ax.scale) - 3
+    });
   }
   return values;
 };
