@@ -42,7 +42,7 @@ widgets.App.prototype.updateWidth = function() {
 /** staticmethod */
 widgets.App._model_width = function(model, width) {
   model._width = model.type === 'Column' ?
-      Math.round(width * model.cols / 24) : width;
+      Math.round(width * model.cols / 24) - 30 : width;
   if (model.nodes && model.nodes.length) {
     for (var i = 0; i < model.nodes.length; i++) {
       widgets.App._model_width(model.nodes[i], model._width);

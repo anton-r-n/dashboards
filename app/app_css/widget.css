@@ -1,5 +1,6 @@
 .Widget {
   margin-bottom: .5rem;
+  padding-bottom: 1rem;
 }
 
 .Widget .header {
