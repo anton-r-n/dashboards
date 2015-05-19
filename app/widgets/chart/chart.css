@@ -90,6 +90,20 @@
   top: 0;
   left: -3px;
   border-radius: 50%;
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
+}
+
+.chart_body .highlight .marker {
+  vertical-align: middle;
+  display: inline-block;
+  position: relative;
+  margin-right: .5em;
+  width: 30px;
+  height: 2px;
+}
+
+.chart_body .highlight .marker .bullet {
+  top: -3px;
+  left: 11px;
 }

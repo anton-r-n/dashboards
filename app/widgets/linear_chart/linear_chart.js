@@ -111,7 +111,7 @@ widgets.LinearChart.prototype._values = function(idx, axis) {
     values.push({
       value: $.humanize(current),
       name: i,
-      y: this.chart_height - Math.round((current - ax.min) / ax.scale) - 3
+      y: this.chart_height - Math.round((current - ax.min) / ax.scale) - 4
     });
   }
   return values;
