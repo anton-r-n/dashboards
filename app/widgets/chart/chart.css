@@ -57,13 +57,6 @@
   position: absolute;
   top: 0;
   left: 0;
-}
-
-.chart_body .highlight .line {
-  height: 100%;
-  top: 0;
-  left: 0;
-  position: absolute;
   border-left: 1px dotted #999;
 }
 
@@ -102,7 +95,7 @@
 .chart_body .highlight .bullet {
   position: absolute;
   top: 0;
-  left: -3px;
+  left: -4px;
   border-radius: 50%;
   width: 8px;
   height: 8px;

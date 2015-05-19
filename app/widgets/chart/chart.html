@@ -2,14 +2,7 @@
   <div class="chart_body">
     <svg xmlns="http://www.w3.org/2000/svg"
         class="svg_chart" width="<%: _.width %>px" height="<%: _.height %>px">
-      <g class="axes">
-        <% for (type in _.axes) if (type !== 'bottom') { %>
-          <%: $.tpl('chart_axis', _.axes[type]) %>
-        <% } %>
-        <% if ('bottom' in _.axes) { %>
-          <%: $.tpl('chart_axis', _.axes['bottom']) %>
-        <% } %>
-      </g>
+      <%: $.tpl('chart_axes', _.axes) %>
       <g class="Colors curves" transform="translate(<%: _.data_translate %>)">
         <% for (var type in _.data) { %>
           <%: $.tpl('chart_curves', _.data[type]) %>
@@ -18,6 +11,18 @@
     </svg>
     <div class="highlight"></div>
   </div>
+</script>
+
+
+<script data-tpl="chart_axes" type="text/html">
+  <g class="axes">
+    <% for (type in _) if (type !== 'bottom') { %>
+      <%: $.tpl('chart_axis', _[type]) %>
+    <% } %>
+    <% if ('bottom' in _) { %>
+      <%: $.tpl('chart_axis', _['bottom']) %>
+    <% } %>
+  </g>
 </script>
 
 
@@ -50,23 +55,20 @@
 <script data-tpl="chart_highlight" type="text/html">
   <div class="Colors highlight_group"
       style="top:<%: _.top %>px;left:<%: _.x %>px;height:<%: _.height %>px">
-    <div class="values <%: _.side %>" style="top:<%: _.y %>px">
-      <% if ('left' in _.values) { %>
-        <%: $.tpl('chart_values', _.values['left']) %>
-      <% } %>
-      <% if ('right' in _.values) { %>
-        <%: $.tpl('chart_values', _.values['right']) %>
-      <% } %>
-    </div>
-    <div class="line"></div>
-    <div class="bullets">
-      <% if ('left' in _.values) { %>
-        <%: $.tpl('chart_bullets', _.values['left']) %>
-      <% } %>
-      <% if ('right' in _.values) { %>
-        <%: $.tpl('chart_bullets', _.values['right']) %>
-      <% } %>
-    </div>
+    <%: $.tpl('chart_values_all', _) %>
+    <%: $.tpl('chart_bullets_all', _) %>
+  </div>
+</script>
+
+
+<script data-tpl="chart_values_all" type="text/html">
+  <div class="values <%: _.side %>" style="top:<%: _.y %>px">
+    <% if ('left' in _.values) { %>
+      <%: $.tpl('chart_values', _.values['left']) %>
+    <% } %>
+    <% if ('right' in _.values) { %>
+      <%: $.tpl('chart_values', _.values['right']) %>
+    <% } %>
   </div>
 </script>
 
@@ -81,6 +83,18 @@
         <span class="name"><%= _[i].name %></span>
         &#032;<span class="value"><%= _[i].value %></span>
       </div>
+    <% } %>
+  </div>
+</script>
+
+
+<script data-tpl="chart_bullets_all" type="text/html">
+  <div class="bullets">
+    <% if ('left' in _.values) { %>
+      <%: $.tpl('chart_bullets', _.values['left']) %>
+    <% } %>
+    <% if ('right' in _.values) { %>
+      <%: $.tpl('chart_bullets', _.values['right']) %>
     <% } %>
   </div>
 </script>
