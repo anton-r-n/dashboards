@@ -35,6 +35,10 @@ function mock_linear_chart() {
   return {
     'type': 'LinearChart',
     'name': 'Average CPU Load',
+    'cols': {
+      'left': ['Long Filter Name', 'Another Filter Name'],
+      'right': ['Country != United States']
+    },
     'axes': {
       'bottom': {
         'start': 1429658166000, 'step': 60000, 'length': length},

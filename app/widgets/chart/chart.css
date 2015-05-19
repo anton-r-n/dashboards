@@ -85,6 +85,20 @@
   right: 1em;
 }
 
+.chart_body .highlight .values .value {
+  vertical-align: middle;
+  display: inline-block;
+  width: 3em;
+}
+
+.chart_body .highlight .values .name {
+  display: inline-block;
+  width: 8em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
 .chart_body .highlight .bullet {
   position: absolute;
   top: 0;
