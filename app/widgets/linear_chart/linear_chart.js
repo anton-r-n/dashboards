@@ -16,12 +16,13 @@ widgets.LinearChart.prototype._axisBottom = function(_axis) {
   var tick_width = 100;
   var step_width = _axis.step / axis.scale,
       step = Math.round(tick_width / step_width) * step_width;
+  var shift_top = 'top:' + (this.margin.top + this.chart_height + 1) + 'px;';
 
   for (var i = 0; i <= this.chart_width; i += step) {
     var current = axis.min + i * axis.scale;
+    var left = Math.round(i) + this.margin.left;
     axis.ticks.push({
-      'xy': [Math.round(i), 0].join(','),
-      'val': current,
+      'shift': shift_top + 'left:' + left + 'px',
       'str': $.tzformat(current, -8, '%d.%m %H:%M')
     });
   }

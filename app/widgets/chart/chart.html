@@ -1,8 +1,9 @@
 <script data-tpl="chart" type="text/html">
-  <div class="chart_body">
+  <div class="chart_body"
+      style="width:<%: _.width %>px;height:<%: _.height %>px">
+    <%: $.tpl('chart_axes', _.axes) %>
     <svg xmlns="http://www.w3.org/2000/svg"
-        class="svg_chart" width="<%: _.width %>px" height="<%: _.height %>px">
-      <%: $.tpl('chart_axes', _.axes) %>
+        class="svg_chart">
       <g class="Colors curves" transform="translate(<%: _.data_translate %>)">
         <% for (var type in _.data) { %>
           <%: $.tpl('chart_curves', _.data[type]) %>
@@ -15,33 +16,27 @@
 
 
 <script data-tpl="chart_axes" type="text/html">
-  <g class="axes">
+  <div class="axes">
     <% for (type in _) if (type !== 'bottom') { %>
       <%: $.tpl('chart_axis', _[type]) %>
     <% } %>
     <% if ('bottom' in _) { %>
       <%: $.tpl('chart_axis', _['bottom']) %>
     <% } %>
-  </g>
+  </div>
 </script>
 
 
 <script data-tpl="chart_axis" type="text/html">
-  <g class="axis axis-<%: _.type%>" transform="translate(<%: _.translate %>)">
-    <g class="ticks">
-      <% for (var i = 0; i < _.ticks.length; i++) { %>
-        <g transform="translate(<%: _.ticks[i].xy %>)">
-          <line class="tick-line"
-            x2="<%: _.tick_line.x2 %>" y2="<%: _.tick_line.y2 %>" />
-          <text class="tick-text"
-            dx="<%: _.tick_dx %>" dy="<%: _.tick_dy %>">
-            <%= _.ticks[i].str %>
-          </text>
-        </g>
-      <% } %>
-    </g>
-    <line class="axis-line" x2="<%: _.line.x2 %>" y2="<%: _.line.y2 %>" />
-  </g>
+  <div class="axis axis-<%: _.type%>" style="width:<%: _.width %>">
+    <% for (var i = 0; i < _.ticks.length; i++) { %>
+      <div class="tick" style="<%: _.ticks[i].shift %>">
+        <div class="text" style="<%: _.text_pos %>">
+          <span><%= _.ticks[i].str %></span>
+        </div>
+      </div>
+    <% } %>
+  </div>
 </script>
 
 

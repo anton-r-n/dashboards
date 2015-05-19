@@ -65,8 +65,9 @@ widgets.Chart.prototype._axisVertical = function(_axis, axis) {
   axis.ticks = [];
   var step = _axis.tick;
   for (var v = min; v <= max; v += step) {
+    var shift = this.margin.top + Math.round((max - v) / axis.scale);
     axis.ticks.push({
-      'xy': [0, Math.round((max - v) / axis.scale)].join(','),
+      'shift': 'top:' + shift + 'px',
       'str': $.humanize(v)
     });
   }
@@ -74,13 +75,11 @@ widgets.Chart.prototype._axisVertical = function(_axis, axis) {
 
 
 widgets.Chart.prototype._axisLeft = function(_axis) {
+  var text_pos = this.geom.width - this.margin.left + 5;
   var axis = {
     'type': 'left',
-    'translate': [this.margin.left, this.margin.top].join(','),
-    'line': {'x2': 0, 'y2': this.chart_height},
-    'tick_line': {'x2': this.chart_width, 'y2': 0},
-    'tick_dx': '-.7em',
-    'tick_dy': '.3em'
+    'text_pos': 'right:' + text_pos + 'px',
+    'width': '100%'
   };
   this._axisVertical(_axis, axis);
   return axis;
@@ -90,12 +89,8 @@ widgets.Chart.prototype._axisLeft = function(_axis) {
 widgets.Chart.prototype._axisRight = function(_axis) {
   var axis = {
     'type': 'right',
-    'translate': [
-      this.margin.left + this.chart_width, this.margin.top].join(','),
-    'line': {'x2': 0, 'y2': this.chart_height},
-    'tick_line': {'x2': 5, 'y2': 0},
-    'tick_dx': '.7em',
-    'tick_dy': '.3em'
+    'text_pos': 'left:5px',
+    'width': this.margin.right + 'px'
   };
   this._axisVertical(_axis, axis);
   return axis;
@@ -103,14 +98,12 @@ widgets.Chart.prototype._axisRight = function(_axis) {
 
 
 widgets.Chart.prototype._axisBottomCommon = function(_axis) {
-  var axis = {'type': 'bottom'};
-  axis.translate = [
-    this.margin.left + .5, this.geom.height - this.margin.bottom].join(',');
-  axis.line = {'x2': this.chart_width, 'y2': 0};
-  axis.tick_line = {'x2': 0, 'y2': 5};
-  axis.tick_dx = '0';
-  axis.tick_dy = '1.4em';
-  axis.ticks = [];
+  var axis = {
+    'type': 'bottom',
+    'width': '100%',
+    'text_pos': 'top:5px',
+    'ticks': []
+  };
   return axis;
 };
 

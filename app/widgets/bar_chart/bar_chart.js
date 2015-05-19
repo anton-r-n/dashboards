@@ -11,12 +11,13 @@ widgets.BarChart.prototype._axisBottom = function(_axis) {
   var axis = this._axisBottomCommon(_axis);
 
   this.step = this.chart_width / _axis.cols.length;
+  var shift_top = 'top:' + (this.margin.top + this.chart_height + 1) + 'px;';
 
   for (var i = 0; i < _axis.cols.length; i++) {
     var col = _axis.cols[i];
+    var left = Math.round((i + .5) * this.step) + this.margin.left;
     axis.ticks.push({
-      'xy': [Math.round((i + .5) * this.step), 0].join(','),
-      'val': col,
+      'shift': shift_top + 'left:' + left + 'px',
       'str': col
     });
   }

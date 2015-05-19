@@ -4,51 +4,83 @@
   display: block;
   cursor: default;
   font-size: inherit;
-}
-
-.svg_chart .axis {
-  font-size: 80%;
-}
-
-.svg_chart .axis line {
-  stroke-width: 1;
-  shape-rendering: crispedges;
-}
-
-.svg_chart .axis line.axis-line {
-  stroke: #333;
-}
-
-.svg_chart .axis line.tick-line {
-  stroke: #ccc;
-}
-
-.svg_chart .axis-left .axis-line,
-.svg_chart .axis-right .axis-line {
-  display: none;
-}
-
-.svg_chart .axis-bottom .tick-line {
-}
-
-.svg_chart .axis-left .tick-text {
-  text-anchor: end;
-}
-
-.svg_chart .axis-right .tick-text {
-  text-anchor: start;
-}
-
-.svg_chart .axis-bottom .tick-text {
-  text-anchor: middle;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
 }
 
 .chart_body {
   position: relative;
 }
 
+.chart_body .axes {
+  font-size: 80%;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.chart_body .axis {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+}
+
+.chart_body .axis-left {
+  background-color: #fff;
+  left: 0;
+}
+
+.chart_body .axis-right {
+  background-color: #fff;
+  right: 0;
+}
+
+.chart_body .axis-left .tick,
+.chart_body .axis-right .tick {
+  border-top: 1px solid #ccc;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+.chart_body .axis-left .tick:first-child,
+.chart_body .axis-right .tick:first-child {
+  border-top: 1px solid #666;
+}
+
+.chart_body .axis-bottom .tick {
+  border-left: 1px solid #666;
+  position: absolute;
+  height: 5px;
+}
+
+.chart_body .axis-left .text,
+.chart_body .axis-right .text {
+  background-color: #fff;
+  position: absolute;
+  padding: 0 .3em;
+  color: #666;
+  top: -.8em;
+}
+
+.chart_body .axis-bottom .text {
+  position: absolute;
+  white-space: nowrap;
+  color: #777;
+}
+
+.chart_body .axis-bottom .text span {
+  position: relative;
+  right: 50%;
+}
+
 .chart_body .highlight {
   position: absolute;
+  z-index: 3;
   left: 0;
   top: 0;
 }
