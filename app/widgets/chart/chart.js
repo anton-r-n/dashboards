@@ -27,13 +27,16 @@ widgets.Chart.prototype.process = function(model) {
   view.width = this.geom.width;
   view.height = this.geom.height;
   view.axes = this._axes(model);
+  view.data_length = 0;
 
   view.data = {};
   view.data_translate = [this.margin.left, this.margin.top].join(', ');
   for (var type in view.axes) {
     if (type in model.data) {
+      var data = model.data[type];
+      view.data_length = Math.max(data[0].length, view.data_length);
       view.data[type] = this._scaleData(
-          model.data[type], view.axes[type], view.axes['bottom']);
+          data, view.axes[type], view.axes['bottom']);
     }
   }
   return view;
@@ -125,4 +128,89 @@ widgets.Chart.prototype._updateMinMax = function(data, axis) {
 
   axis._min = min;
   axis._max = max;
+};
+
+
+widgets.Chart.prototype.addEvents = function() {
+  this._root.on('mouseleave', this.mouseleave.bind(this));
+  this._root.on('mouseenter', this.mouseenter.bind(this));
+};
+
+
+widgets.Chart.prototype.mouseenter = function(e) {
+  this._body = this._root.find('.chart_body').off('mousemove');
+  this._body.on('mousemove', this.mousemove.bind(this));
+  this._highlight = this._root.find('.highlight');
+};
+
+
+widgets.Chart.prototype._getRectangle = function(elt) {
+  var rect = this._body[0].getBoundingClientRect();
+  return {
+    'left': rect.left + this.margin.left,
+    'top': rect.top + this.margin.top,
+    'right': rect.left + this.margin.left + this.chart_width,
+    'bottom': rect.top + this.margin.top + this.chart_height
+  };
+};
+
+
+widgets.Chart.prototype.mouseleave = function(e) {
+  this._body.off('mousemove');
+  this._highlight.html('');
+};
+
+
+widgets.Chart.prototype.mousemove = function(e) {
+  var rect = this._body[0].getBoundingClientRect(),
+      ex = e.clientX - rect.left - this.margin.left,
+      ey = e.clientY - rect.top - this.margin.top,
+      max_idx = this.view.data_length - 1,
+      scale = this.view.axes.bottom.scale,
+      step = this.view.axes.bottom.step,
+      values = {};
+
+  if (ex > 0 && ex < this.chart_width && ey > 0 && ey < this.chart_height) {
+    var idx = Math.min(Math.round(ex * scale / step), max_idx);
+    for (var axis in this.model.axes) {
+      if (axis in this.model.data) {
+        values[axis] = this._values(idx, axis);
+      }
+    }
+    this._updateHighlight(ey, ex, values);
+  }
+  else {
+    this._highlight.html('');
+  }
+};
+
+
+widgets.Chart.prototype._values = function(idx, axis) {
+  var values = [],
+      data = this.model.data[axis],
+      cols = this.model.cols[axis],
+      ax = this.view.axes[axis];
+  for (var i = 0; i < data.length; i++) {
+    var current = data[i][idx];
+    values.push({
+      value: $.humanize(current),
+      name: cols[i],
+      y: this.chart_height - Math.round((current - ax.min) / ax.scale) - 4
+    });
+  }
+  return values;
+};
+
+
+widgets.Chart.prototype._updateHighlight = function(ey, ex, values) {
+  this._highlight.html(
+      $.tpl('chart_highlight',
+      {
+        y: ey - 20,
+        x: ex + this.margin.left,
+        side: ex > this.geom.width / 2 ? 'right' : 'left',
+        top: this.margin.top,
+        height: this.chart_height,
+        values: values
+      }));
 };

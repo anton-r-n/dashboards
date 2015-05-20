@@ -5,3 +5,24 @@
 .BarChart .svg_chart .axis-bottom .tick-line {
   display: none;
 }
+
+.BarChart .chart_body .highlight_group {
+  border-left: none;
+}
+
+.BarChart .chart_body .highlight .bullet {
+  display: none;
+}
+
+.BarChart .chart_body .highlight .marker {
+  top: 3px
+}
+
+.BarChart .chart_body .highlight .marker .bullet {
+  display: block;
+  border-radius: 0;
+  height: 6px;
+  width: 12px;
+  left: 9px;
+  top: -6px;
+}
