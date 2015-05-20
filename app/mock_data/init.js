@@ -26,45 +26,47 @@ function random_values(min, max, arr) {
 }
 
 
-function mock_linear_chart(name, len) {
-  var length = len ? len : 100,
+function mock_linear_chart(name, len, right_axis) {
+  var length = +len ? +len : 100,
       min0 = 0,
       max0 = 100,
       min1 = 0,
       max1 = 150;
-  return {
+  var chart_data = {
     'type': 'LinearChart',
     'name': name ? name : 'Linear Chart',
     'cols': {
-      'left': ['Long Filter Name', 'Another Filter Name'],
-      'right': ['Country != United States']
+      'left': ['Long Filter Name', 'Another Filter Name']
     },
     'axes': {
-      'bottom': {
-        'start': 1429658166000, 'step': 60000, 'length': length},
-      'left': {'min': min0, 'max': max0, 'tick': 25},
-      'right': {'min': min1, 'max': max1, 'tick': 25}
+      'bottom': {'start': 1429658166000, 'step': 60000, 'length': length},
+      'left': {'min': min0, 'max': max0, 'tick': 25}
     },
     'data': {
       'left': [
         random_series(min0, max0, length),
         random_series(min0, max0, length)
-      ],
-      'right': [
-        random_series(min1, max1, length)
       ]
     }
   };
+
+  if (right_axis) {
+    chart_data.cols.right = ['Country != United States'];
+    chart_data.axes.right = {'min': min1, 'max': max1, 'tick': 25};
+    chart_data.data.right = [random_series(min1, max1, length)];
+  }
+
+  return chart_data;
 }
 
 
-function mock_bar_chart() {
+function mock_bar_chart(name) {
   var length = 5,
       min0 = 0,
       max0 = 100;
   return {
     'type': 'BarChart',
-    'name': 'Distribution Bar Chart',
+    'name': name ? name : 'Bar Chart',
     'axes': {
       'bottom': {
         'cols': ['Jan', 'Feb', 'Mar', 'Apr', 'May']
@@ -116,7 +118,7 @@ var data = {
               'type': 'Column',
               'cols': 24,
               'nodes': [
-                mock_linear_chart('Average Performance', 200)
+                mock_linear_chart('Average Performance', 200, true)
               ]
             }
           ]
@@ -128,7 +130,7 @@ var data = {
               'type': 'Column',
               'cols': 12,
               'nodes': [
-                mock_linear_chart('Average CPU Load')
+                mock_linear_chart('Average CPU Load', 100)
               ]
             },
 
@@ -136,7 +138,7 @@ var data = {
               'type': 'Column',
               'cols': 12,
               'nodes': [
-                mock_linear_chart('Average Memory Usage')
+                mock_linear_chart('Average Memory Usage', 100)
               ]
             }
           ]
@@ -146,7 +148,63 @@ var data = {
           'nodes': [
             {
               'type': 'Column',
-              'cols': 12,
+              'cols': 8,
+              'nodes': [
+                mock_bar_chart('Distribution Bar Chart I')
+              ]
+            },
+
+            {
+              'type': 'Column',
+              'cols': 8,
+              'nodes': [
+                mock_bar_chart('Distribution Bar Chart II')
+              ]
+            },
+
+            {
+              'type': 'Column',
+              'cols': 8,
+              'nodes': [
+                mock_bar_chart('Distribution Bar Chart III')
+              ]
+            }
+          ]
+        },
+        {
+          'type': 'Panel',
+          'nodes': [
+            {
+              'type': 'Column',
+              'cols': 8,
+              'nodes': [
+                mock_linear_chart('Average Memory I', 100)
+              ]
+            },
+
+            {
+              'type': 'Column',
+              'cols': 8,
+              'nodes': [
+                mock_linear_chart('Average Memory II', 100)
+              ]
+            },
+
+            {
+              'type': 'Column',
+              'cols': 8,
+              'nodes': [
+                mock_linear_chart('Average Memory III', 100)
+              ]
+            }
+          ]
+        },
+        {
+          'type': 'Panel',
+          'nodes': [
+            {
+              'type': 'Column',
+              'cols': 8,
               'nodes': [
                 mock_pie_chart()
               ]
@@ -154,9 +212,17 @@ var data = {
 
             {
               'type': 'Column',
-              'cols': 12,
+              'cols': 8,
               'nodes': [
-                mock_bar_chart()
+                mock_pie_chart()
+              ]
+            },
+
+            {
+              'type': 'Column',
+              'cols': 8,
+              'nodes': [
+                mock_pie_chart()
               ]
             }
           ]
