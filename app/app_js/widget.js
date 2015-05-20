@@ -39,7 +39,7 @@ Widget.prototype.update = function(model) {
  * Destroy
  */
 Widget.prototype.destroy = function() {
-  console.log('-- destroy %s', this.id);
+  // console.log('-- destroy %s', this.id);
   this._destroyChildNodes();
   this.removeEvents();
 };
@@ -85,7 +85,7 @@ Widget.prototype._render = function(model) {
 
 Widget.prototype._renderRecursively = function(model) {
 
-  console.log('render %s', this.id, 'width', model._width);
+  // console.log('render %s', this.id, 'width', model._width);
 
   if (model.nodes && model.nodes.length) {
     this.nodes = this._initNodes(model.nodes);

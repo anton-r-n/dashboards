@@ -13,7 +13,7 @@ widgets.Chart.prototype.update_on_resize = function() {
 
 
 widgets.Chart.prototype.process = function(model) {
-  console.log('process ' + model.type);
+  // console.log('process ' + model.type);
 
   var view = {};
 

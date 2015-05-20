@@ -8,7 +8,7 @@ widgets.PieChart.prototype = new Widget();
 
 
 widgets.PieChart.prototype.process = function(model) {
-  console.log('process ' + model.type);
+  // console.log('process ' + model.type);
 
   var view = {};
 
