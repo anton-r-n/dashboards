@@ -26,15 +26,15 @@ function random_values(min, max, arr) {
 }
 
 
-function mock_linear_chart() {
-  var length = 100,
+function mock_linear_chart(name, len) {
+  var length = len ? len : 100,
       min0 = 0,
       max0 = 100,
       min1 = 0,
       max1 = 150;
   return {
     'type': 'LinearChart',
-    'name': 'Average CPU Load',
+    'name': name ? name : 'Linear Chart',
     'cols': {
       'left': ['Long Filter Name', 'Another Filter Name'],
       'right': ['Country != United States']
@@ -114,9 +114,21 @@ var data = {
           'nodes': [
             {
               'type': 'Column',
+              'cols': 24,
+              'nodes': [
+                mock_linear_chart('Average Performance', 200)
+              ]
+            }
+          ]
+        },
+        {
+          'type': 'Panel',
+          'nodes': [
+            {
+              'type': 'Column',
               'cols': 12,
               'nodes': [
-                mock_linear_chart()
+                mock_linear_chart('Average CPU Load')
               ]
             },
 
@@ -124,7 +136,7 @@ var data = {
               'type': 'Column',
               'cols': 12,
               'nodes': [
-                mock_linear_chart()
+                mock_linear_chart('Average Memory Usage')
               ]
             }
           ]
