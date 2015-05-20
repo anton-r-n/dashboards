@@ -28,6 +28,7 @@ widgets.BarChart.prototype._axisBottom = function(_axis) {
 
 widgets.BarChart.prototype._scaleData = function(data, axis, x_axis) {
   var d = [];
+  var space = 6;
   var height = this.chart_height;
   var bar_width = this.step / data.length;
 
@@ -36,8 +37,8 @@ widgets.BarChart.prototype._scaleData = function(data, axis, x_axis) {
     for (var j = 0; j < data[i].length; j++) {
       var current = data[i][j];
       if (typeof current === 'number') {
-        x = Math.round(this.step * j) + bar_width * i;
-        x1 = x + bar_width;
+        x = Math.round(this.step * j + space / 2) + bar_width * i;
+        x1 = Math.round(x + bar_width - space / 2);
         y = height - Math.round((current - axis.min) / axis.scale);
         curve.push('M', x, height, x, y, x1, y, x1, height, 'z');
       }
