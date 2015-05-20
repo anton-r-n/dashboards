@@ -8,13 +8,14 @@ widgets.BarChart.prototype = new widgets.Chart();
 
 
 widgets.BarChart.prototype._axisBottom = function(_axis) {
-  var axis = this._axisBottomCommon(_axis);
+  var axis = this._axisBottomCommon(_axis),
+      cols = this.model.cols.bottom;
 
-  this.step = this.chart_width / _axis.cols.length;
+  this.step = this.chart_width / cols.length;
   var shift_top = 'top:' + (this.margin.top + this.chart_height + 1) + 'px;';
 
-  for (var i = 0; i < _axis.cols.length; i++) {
-    var col = _axis.cols[i];
+  for (var i = 0; i < cols.length; i++) {
+    var col = cols[i];
     var left = Math.round((i + .5) * this.step) + this.margin.left;
     axis.ticks.push({
       'shift': shift_top + 'left:' + left + 'px',

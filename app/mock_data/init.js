@@ -67,10 +67,12 @@ function mock_bar_chart(name) {
   return {
     'type': 'BarChart',
     'name': name ? name : 'Bar Chart',
+    'cols': {
+      'left': ['Long Name', 'Another Name', 'Country != United States'],
+      'bottom': ['Jan', 'Feb', 'Mar', 'Apr', 'May']
+    },
     'axes': {
-      'bottom': {
-        'cols': ['Jan', 'Feb', 'Mar', 'Apr', 'May']
-      },
+      'bottom': {},
       'left': {'min': min0, 'max': max0, 'tick': 25}
     },
     'data': {
