@@ -58,7 +58,6 @@ widgets.LinearChart.prototype.mouseenter = function(e) {
   this._body = this._root.find('.chart_body').off('mousemove');
   this._body.on('mousemove', this.mousemove.bind(this));
   this._highlight = this._root.find('.highlight');
-  this._idx = -1;
 };
 
 
@@ -75,6 +74,7 @@ widgets.LinearChart.prototype._getRectangle = function(elt) {
 
 widgets.LinearChart.prototype.mouseleave = function(e) {
   this._body.off('mousemove');
+  this._highlight.html('');
 };
 
 
@@ -96,10 +96,7 @@ widgets.LinearChart.prototype.mousemove = function(e) {
     }
   }
 
-  if (this._idx !== idx) {
-    this._idx = idx;
-    this._updateHighlight(ey, idx, values);
-  }
+  this._updateHighlight(ey, idx, values);
 };
 
 
