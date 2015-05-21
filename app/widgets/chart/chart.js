@@ -17,7 +17,7 @@ widgets.Chart.prototype.process = function(model) {
 
   var view = {};
 
-  this.geom = {'width': model._width, 'height': 150};
+  this.geom = {'width': model._width, 'height': 120};
   this.margin = {'top': 5, 'right': 50, 'bottom': 20, 'left': 50};
 
   this.chart_height = this.geom.height - this.margin.bottom - this.margin.top;

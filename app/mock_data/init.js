@@ -40,7 +40,7 @@ function mock_linear_chart(name, len, right_axis) {
     },
     'axes': {
       'bottom': {'start': 1429658166000, 'step': 60000, 'length': length},
-      'left': {'min': min0, 'max': max0, 'tick': 25}
+      'left': {'min': min0, 'max': max0, 'tick': 20}
     },
     'data': {
       'left': [
@@ -73,7 +73,7 @@ function mock_bar_chart(name) {
     },
     'axes': {
       'bottom': {},
-      'left': {'min': min0, 'max': max0, 'tick': 25}
+      'left': {'min': min0, 'max': max0, 'tick': 20}
     },
     'data': {
       'left': [

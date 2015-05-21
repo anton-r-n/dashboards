@@ -1,5 +1,6 @@
 .BarChart .svg_chart .curve {
   stroke: none;
+  shape-rendering: crispedges;
 }
 
 .BarChart .svg_chart .axis-bottom .tick-line {
