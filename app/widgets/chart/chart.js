@@ -141,17 +141,8 @@ widgets.Chart.prototype.mouseenter = function(e) {
   this._body = this._root.find('.chart_body').off('mousemove');
   this._body.on('mousemove', this.mousemove.bind(this));
   this._highlight = this._root.find('.highlight');
-};
-
-
-widgets.Chart.prototype._getRectangle = function(elt) {
-  var rect = this._body[0].getBoundingClientRect();
-  return {
-    'left': rect.left + this.margin.left,
-    'top': rect.top + this.margin.top,
-    'right': rect.left + this.margin.left + this.chart_width,
-    'bottom': rect.top + this.margin.top + this.chart_height
-  };
+  this._rect = this._body[0].getBoundingClientRect(),
+  this._window_width = window.innerWidth;
 };
 
 
@@ -162,9 +153,8 @@ widgets.Chart.prototype.mouseleave = function(e) {
 
 
 widgets.Chart.prototype.mousemove = function(e) {
-  var rect = this._body[0].getBoundingClientRect(),
-      ex = e.clientX - rect.left - this.margin.left,
-      ey = e.clientY - rect.top - this.margin.top,
+  var ex = e.clientX - this._rect.left - this.margin.left,
+      ey = e.clientY - this._rect.top - this.margin.top,
       max_idx = this.view.data_length - 1,
       scale = this.view.axes.bottom.scale,
       step = this.view.axes.bottom.step,
@@ -177,7 +167,7 @@ widgets.Chart.prototype.mousemove = function(e) {
         values[axis] = this._values(idx, axis);
       }
     }
-    this._updateHighlight(ey, ex, values);
+    this._updateHighlight(ey, ex + this.margin.left, values);
   }
   else {
     this._highlight.html('');
@@ -203,14 +193,16 @@ widgets.Chart.prototype._values = function(idx, axis) {
 
 
 widgets.Chart.prototype._updateHighlight = function(ey, ex, values) {
-  this._highlight.html(
-      $.tpl('chart_highlight',
-      {
-        y: ey - 20,
-        x: ex + this.margin.left,
-        side: ex > this.geom.width / 2 ? 'right' : 'left',
-        top: this.margin.top,
-        height: this.chart_height,
-        values: values
-      }));
+  var side = ex > this.geom.width / 2 ? 'right' : 'left';
+  side = this._rect.left + ex + 220 > this._window_width ? 'right' : side;
+  side = this._rect.left + ex - 220 < 0 ? 'left' : side;
+
+  this._highlight.html($.tpl('chart_highlight', {
+    y: ey - 20,
+    x: ex,
+    side: side,
+    top: this.margin.top,
+    height: this.chart_height,
+    values: values
+  }));
 };
