@@ -1,0 +1,54 @@
+<script data-tpl="GeoChart" type="text/html">
+  <div class="Widget GeoChart" data-obj="<%= _.id %>">
+    <div class="header">
+      <h3><%= _.name %></h3>
+    </div>
+    <div class="chart_body"
+        style="width:<%: _.width %>px;height:<%: _.height %>px">
+        <div class="map_area">
+          <%: $.tpl('GeoChart_map', _.map) %>
+          <%: $.tpl('GeoChart_copyright', null) %>
+          <%: $.tpl('GeoChart_handlers', null) %>
+        </div>
+    </div>
+  </div>
+</script>
+
+
+<script data-tpl="GeoChart_copyright" type="text/html">
+  <div class="openstreetmap_copyright">
+    &copy;&#160;
+    <a class="external_link" target="_blank"
+        href="https://www.openstreetmap.org/copyright">
+      OpenStreetMap contributors
+    </a>
+  </div>
+</script>
+
+
+<script data-tpl="GeoChart_tile" type="text/html">
+  <div class="tile256" style="background-image:url(<%: _.src %>);
+    left:<%: _.left %>px; top:<%: _.top %>px"></div>
+</script>
+
+
+<script data-tpl="GeoChart_map" type="text/html">
+  <div class="map">
+    <div class="layers"
+      style="left:<%: _.left %>px;top:<%: _.top %>px">
+      <div class="tiles">
+        <% for (var i = 0; i < _.tiles.length; i++) { %>
+          <%: $.tpl('GeoChart_tile', _.tiles[i]) %>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</script>
+
+
+<script data-tpl="GeoChart_handlers" type="text/html">
+  <div class="handlers">
+    <div class="icon plus"></div>
+    <div class="icon minus"></div>
+  </div>
+</script>

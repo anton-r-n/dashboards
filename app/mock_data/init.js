@@ -86,6 +86,32 @@ function mock_bar_chart(name) {
 }
 
 
+function mock_geo_chart(name, amount) {
+  var length = 5,
+      min0 = 0,
+      max0 = 100;
+  return {
+    'type': 'GeoChart',
+    'name': name ? name : 'Geo Chart',
+    'cols': {
+      'left': ['Long Name', 'Another Name', 'Country != United States'],
+      'bottom': ['Jan', 'Feb', 'Mar', 'Apr', 'May']
+    },
+    'axes': {
+      'bottom': {},
+      'left': {'min': min0, 'max': max0, 'tick': 20}
+    },
+    'data': {
+      'left': [
+        random_values(min0, max0, new Array(length)),
+        random_values(min0, max0, new Array(length)),
+        random_values(min0, max0, new Array(length))
+      ]
+    }
+  };
+}
+
+
 function mock_pie_chart() {
   return {
     'type': 'PieChart',
@@ -121,6 +147,18 @@ var data = {
               'cols': 24,
               'nodes': [
                 mock_linear_chart('Average Performance', 200, true)
+              ]
+            }
+          ]
+        },
+        {
+          'type': 'Panel',
+          'nodes': [
+            {
+              'type': 'Column',
+              'cols': 24,
+              'nodes': [
+                mock_geo_chart('Geo Distribution', 200)
               ]
             }
           ]
