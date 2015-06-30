@@ -17,7 +17,7 @@
    */
   ns.tpl = function(str, data) {
     var fn = !/\W/.test(str) ?
-        cache[str] = cache[str] || ns.tpl(get_source(str).innerHTML) :
+        cache[str] = cache[str] || ns.tpl(source(str).innerHTML) :
         new Function('_', compose(str));
     return arguments.length > 1 ? fn(data) : fn;
   };
@@ -27,11 +27,10 @@
    * @param {String} Selector selector name.
    * @return {Object} DOMNode.
    */
-  function get_source(selector) {
-    return document.querySelector('[data-tpl="' + selector + '"]') ||
-        (function() {
-          throw new Error('Template for "' + selector + '" does not exist.');
-        })();
+  function source(selector) {
+    var template = document.querySelector('[data-tpl="' + selector + '"]');
+    if (template) return template;
+    throw new Error('Template for "' + selector + '" does not exist.');
   }
 
   function compose(str) {
@@ -50,9 +49,10 @@
   }
 
   /* Escape backslashes and apostrophes */
-  function apos($1, $2, $3) {
-    return /%>/.test($3) ?
-        $3 : $2 + $3.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+  function apos(_, $1, $2) {
+    if (typeof $1 === 'undefined') $1 = '';
+    return /%>/.test($2) ?
+        $2 : $1 + $2.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
   }
 
   var entities = {
