@@ -59,22 +59,23 @@ widgets.GeoChart.prototype.mousedown = function(e) {
   var layers = this._root.find('.layers')[0];
   var left = e.screenX - this.view['map']['left'];
   var top = e.screenY - this.view['map']['top'];
-  $(document).on('mousemove.map', function(e1) {
-    layers['style']['left'] = (e1.screenX - left) + 'px';
-    layers['style']['top'] = (e1.screenY - top) + 'px';
-  })
-  .on('mouseup.map', function(e2) {
-    $(document).off('mousemove.map').off('mouseup.map');
-    var center = self._projection(self.lon, self.lat),
-        x = (center.x - e2.screenX + e.screenX) / self.map_size,
-        y = (center.y - e2.screenY + e.screenY) / self.map_size;
-    var coord = self._xy2lonlat(
-      self._remainder(x, 1),
-      self._remainder(y, 1));
-    self.model['lon'] = coord.lon;
-    self.model['lat'] = coord.lat;
-    self.update(self.model);
-  });
+  $(document)
+      .on('mousemove.map', function(e1) {
+        layers['style']['left'] = (e1.screenX - left) + 'px';
+        layers['style']['top'] = (e1.screenY - top) + 'px';
+      })
+      .on('mouseup.map', function(e2) {
+        $(document).off('mousemove.map').off('mouseup.map');
+        var center = self._projection(self.lon, self.lat),
+            x = (center.x - e2.screenX + e.screenX) / self.map_size,
+            y = (center.y - e2.screenY + e.screenY) / self.map_size;
+        var coord = self._xy2lonlat(
+            self._remainder(x, 1),
+            self._remainder(y, 1));
+        self.model['lon'] = coord.lon;
+        self.model['lat'] = coord.lat;
+        self.update(self.model);
+      });
 };
 
 
