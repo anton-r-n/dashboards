@@ -26,6 +26,7 @@ widgets.GeoChart.prototype.process = function(model) {
   this.lon = 'lon' in model ? model['lon'] % 180 : 0;
   this.lat = 'lat' in model ? model['lat'] % 90 : 42;
   view['map'] = this.updateMap(this.lon, this.lat);
+  view['map']['data'] = this.updateMapData(this.model, 0);
   return view;
 };
 
@@ -88,6 +89,25 @@ widgets.GeoChart.prototype.zoomIn = function() {
 widgets.GeoChart.prototype.zoomOut = function() {
   this.zoom--;
   this.update(this.model);
+};
+
+
+widgets.GeoChart.prototype.updateMapData = function(model, idx) {
+  var data = [],
+      axis = model.cols.bottom;
+  var tile_size = this.tile_size;
+  var center = this._projection(this.lon, this.lat);
+  var shift = this._shift(center, tile_size);
+  for (var i = 0; i < axis.length; i++) {
+    var point = this._projection(model.coords[i][1], model.coords[i][0]);
+    data.push({
+      'name': axis[i],
+      'value': $.humanize(model.data.left[idx][i]),
+      'left': point.x - center.x + shift.x,
+      'top': point.y - center.y + shift.y
+    });
+  }
+  return data;
 };
 
 

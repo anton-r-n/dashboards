@@ -42,6 +42,13 @@
   height: 256px;
 }
 
+.GeoChart .map_label {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+}
+
 .GeoChart .handlers {
   position: absolute;
   top: 5%;

@@ -15,13 +15,17 @@
 </script>
 
 
-<script data-tpl="GeoChart_copyright" type="text/html">
-  <div class="openstreetmap_copyright">
-    &copy;&#160;
-    <a class="external_link" target="_blank"
-        href="https://www.openstreetmap.org/copyright">
-      OpenStreetMap contributors
-    </a>
+<script data-tpl="GeoChart_map" type="text/html">
+  <div class="map">
+    <div class="layers"
+      style="left:<%: _.left %>px;top:<%: _.top %>px">
+      <div class="tiles">
+        <% for (var i = 0; i < _.tiles.length; i++) { %>
+          <%: $.tpl('GeoChart_tile', _.tiles[i]) %>
+        <% } %>
+      </div>
+      <%: $.tpl('GeoChart_data', _.data) %>
+    </div>
   </div>
 </script>
 
@@ -32,16 +36,26 @@
 </script>
 
 
-<script data-tpl="GeoChart_map" type="text/html">
-  <div class="map">
-    <div class="layers"
-      style="left:<%: _.left %>px;top:<%: _.top %>px">
-      <div class="tiles">
-        <% for (var i = 0; i < _.tiles.length; i++) { %>
-          <%: $.tpl('GeoChart_tile', _.tiles[i]) %>
-        <% } %>
+<script data-tpl="GeoChart_data" type="text/html">
+  <div class="map_data Colors">
+    <% for (var i = 0; i < _.length; i++) { %>
+      <div
+        class="map_label color_0"
+        title="<%= _[i].name %>: <%= _[i].value %>"
+        style="left:<%: _[i].left %>px;top:<%: _[i].top %>px;">
       </div>
-    </div>
+    <% } %>
+  </div>
+</script>
+
+
+<script data-tpl="GeoChart_copyright" type="text/html">
+  <div class="openstreetmap_copyright">
+    &copy;&#160;
+    <a class="external_link" target="_blank"
+        href="https://www.openstreetmap.org/copyright">
+      OpenStreetMap contributors
+    </a>
   </div>
 </script>
 
