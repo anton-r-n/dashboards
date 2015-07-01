@@ -87,15 +87,16 @@ function mock_bar_chart(name) {
 
 
 function mock_geo_chart(name, amount) {
-  var length = 5,
+  var length = city_names.length,
       min0 = 0,
       max0 = 100;
   return {
     'type': 'GeoChart',
     'name': name ? name : 'Geo Chart',
+    'coords': city_coords,
     'cols': {
       'left': ['Long Name', 'Another Name', 'Country != United States'],
-      'bottom': ['Jan', 'Feb', 'Mar', 'Apr', 'May']
+      'bottom': city_names
     },
     'axes': {
       'bottom': {},
@@ -125,6 +126,36 @@ function mock_pie_chart() {
     ]
   };
 }
+
+var cities = [
+  ['Shanghai', 31.2, 121.5],
+  ['Karachi', 24.86, 67.01],
+  ['Beijing', 39.92, 116.38],
+  ['Istanbul', 41.01, 28.95],
+  ['Lagos', 6.45, 3.39],
+  ['Guangzhou', 23.13, 113.27],
+  ['Mumbai', 18.97, 72.82],
+  ['Moscow', 55.75, 37.62],
+  ['Dhaka', 23.7, 90.37],
+  ['Cairo', 30.05, 31.23],
+  ['São Paulo', -23.55, -46.63],
+  ['Lahore', 31.55, 74.34],
+  ['Shenzhen', 22.55, 114.1],
+  ['Seoul', 37.57, 126.97],
+  ['New York City', 40.71, -74.00],
+  ['Bangalore', 12.97, 77.57],
+  ['London', 51.51, 0.00],
+  ['Saint Petersburg', 59.95, 30.3],
+  ['Los Angeles', 34.05, -118.25],
+  ['Berlin', 52.52, 13.38],
+  ['Madrid', 40.38, -3.72],
+  ['Paris', 48.86, 2.35],
+  ['Boston', 42.36, -71.06],
+  ['San Francisco', 37.78, -122.42]
+];
+
+var city_names = cities.map(function(row) {return row[0]});
+var city_coords = cities.map(function(row) {return [row[1], row[2]]});
 
 
 var data = {
