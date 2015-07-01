@@ -30,6 +30,38 @@
   background-color: rgb(102, 102, 102);
 }
 
+.Colors div.border_0 {
+  border-color: rgb(27, 158, 119);
+}
+
+.Colors div.border_1 {
+  border-color: rgb(217, 95, 2);
+}
+
+.Colors div.border_2 {
+  border-color: rgb(117, 112, 179);
+}
+
+.Colors div.border_3 {
+  border-color: rgb(231, 41, 138);
+}
+
+.Colors div.border_4 {
+  border-color: rgb(102, 166, 30);
+}
+
+.Colors div.border_5 {
+  border-color: rgb(230, 171, 2);
+}
+
+.Colors div.border_6 {
+  border-color: rgb(166, 118, 29);
+}
+
+.Colors div.border_7 {
+  border-color: rgb(102, 102, 102);
+}
+
 .Colors path.color_0 {
   stroke: rgb(27, 158, 119);
   fill: rgb(27, 158, 119);

@@ -40,9 +40,14 @@
   <div class="map_data Colors">
     <% for (var i = 0; i < _.length; i++) { %>
       <div
-        class="map_label color_0"
-        title="<%= _[i].name %>: <%= _[i].value %>"
-        style="left:<%: _[i].left %>px;top:<%: _[i].top %>px;">
+          class="map_label border_0"
+          style="left:<%: _[i].left %>px;top:<%: _[i].top %>px;">
+        <div class="plate">
+          <div class="label_text color_0">
+            <div class="name"><%= _[i].name %></div>
+            <div class="value"><%= _[i].value %></div>
+          </div>
+        </div>
       </div>
     <% } %>
   </div>

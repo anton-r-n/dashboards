@@ -151,7 +151,10 @@ var cities = [
   ['Madrid', 40.38, -3.72],
   ['Paris', 48.86, 2.35],
   ['Boston', 42.36, -71.06],
-  ['San Francisco', 37.78, -122.42]
+  ['San Francisco', 37.78, -122.42],
+  ['Denver', 39.76, -104.88],
+  ['Miami', 25.77, -80.21],
+  ['Seattle', 47.61, -122.33]
 ];
 
 var city_names = cities.map(function(row) {return row[0]});
