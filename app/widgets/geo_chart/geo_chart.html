@@ -40,12 +40,12 @@
   <div class="map_data Colors">
     <% for (var i = 0; i < _.length; i++) { %>
       <div
-          class="map_label border_0"
+          class="map_label"
           style="left:<%: _[i].left %>px;top:<%: _[i].top %>px;">
         <div class="plate">
-          <div class="label_text color_0">
-            <div class="name"><%= _[i].name %></div>
-            <div class="value"><%= _[i].value %></div>
+          <div class="label_text color_0 border_0">
+            <div class="name nowrap_restricted"><%= _[i].name %></div>
+            <div class="value nowrap_restricted"><%= _[i].value %></div>
           </div>
         </div>
       </div>
