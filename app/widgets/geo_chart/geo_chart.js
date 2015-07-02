@@ -98,16 +98,35 @@ widgets.GeoChart.prototype.updateMapData = function(model, idx) {
   var tile_size = this.tile_size;
   var center = this._projection(this.lon, this.lat);
   var shift = this._shift(center, tile_size);
+  var half_width = this.width / 2;
   for (var i = 0; i < axis.length; i++) {
     var point = this._projection(model.coords[i][1], model.coords[i][0]);
-    data.push({
+    var x0 = point.x - center.x;
+    for (var x = x0; x < half_width; x += this.map_size) {
+      data.push(label());
+    }
+    for (var x = x0 - this.map_size; x > -half_width; x -= this.map_size) {
+      data.push(label());
+    }
+  }
+
+  function label() {
+    return {
       'name': axis[i],
       'value': $.humanize(model.data.left[idx][i]),
-      'left': point.x - center.x + shift.x,
+      'left': x + shift.x,
       'top': point.y - center.y + shift.y
-    });
+    };
   }
+
+  data.sort(this.__compare_by_top);
+
   return data;
+};
+
+
+widgets.GeoChart.prototype.__compare_by_top = function(a, b) {
+  return a['top'] - b['top'];
 };
 
 
@@ -139,6 +158,14 @@ widgets.GeoChart.prototype.updateMap = function(lon, lat) {
       });
     }
   }
+
+  function compare(a, b) {
+    var d1 = Math.pow(a.top - center.y, 2) + Math.pow(a.left - center.x, 2),
+        d2 = Math.pow(b.top - center.y, 2) + Math.pow(b.left - center.x, 2);
+    return d1 - d2;
+  }
+
+  map['tiles'].sort(compare);
 
   return map;
 };
