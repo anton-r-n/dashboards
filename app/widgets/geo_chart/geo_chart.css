@@ -58,7 +58,7 @@
 
 .GeoChart .map_label .label_text {
   color: #fff;
-  border-radius: 3px;
+  border-radius: 2px;
   white-space: nowrap;
   padding: 0.3em .5em;
   position: relative;
@@ -71,6 +71,7 @@
 }
 
 .GeoChart .map_label .label_text:hover {
+  border-radius: 3px;
   font-size: 200%;
   opacity: 1;
 }

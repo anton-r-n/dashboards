@@ -89,7 +89,7 @@ function mock_bar_chart(name) {
 function mock_geo_chart(name, amount) {
   var length = city_names.length,
       min0 = 0,
-      max0 = 100;
+      max0 = 1e+5;
   return {
     'type': 'GeoChart',
     'name': name ? name : 'Geo Chart',
@@ -117,7 +117,7 @@ function mock_pie_chart() {
   return {
     'type': 'PieChart',
     'name': 'Distribution Pie Chart',
-    'max': 100,
+    'max': 1e5,
     'cols': ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
     'data': [
       [10, 25, 12, 33, 11],
@@ -133,7 +133,7 @@ var cities = [
   ['Beijing', 39.92, 116.38],
   ['Istanbul', 41.01, 28.95],
   ['Lagos', 6.45, 3.39],
-  ['Guangzhou', 23.13, 113.27],
+  ['Tokyo', 35.68, 139.68],
   ['Mumbai', 18.97, 72.82],
   ['Moscow', 55.75, 37.62],
   ['Dhaka', 23.7, 90.37],
@@ -154,7 +154,9 @@ var cities = [
   ['San Francisco', 37.78, -122.42],
   ['Denver', 39.76, -104.88],
   ['Miami', 25.77, -80.21],
-  ['Seattle', 47.61, -122.33]
+  ['Seattle', 47.61, -122.33],
+  ['Mexico', 19.433, -99.13],
+  ['Rome', 41.9, 12.5]
 ];
 
 var city_names = cities.map(function(row) {return row[0]});
