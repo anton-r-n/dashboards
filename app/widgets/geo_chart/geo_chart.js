@@ -5,6 +5,7 @@
 /** @constructor */
 widgets.GeoChart = function() {};
 widgets.GeoChart.prototype = new Widget();
+widgets.GeoChart.prototype.constructor.GeoChart;
 
 
 widgets.GeoChart.prototype.update_on_resize = function() {

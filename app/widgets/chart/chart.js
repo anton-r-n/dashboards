@@ -5,6 +5,7 @@
 /** @constructor */
 widgets.Chart = function() {};
 widgets.Chart.prototype = new Widget();
+widgets.Chart.prototype.constructor = widgets.Chart;
 
 
 widgets.Chart.prototype.update_on_resize = function() {

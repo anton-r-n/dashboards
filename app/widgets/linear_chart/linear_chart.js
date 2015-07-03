@@ -5,6 +5,8 @@
 /** @constructor */
 widgets.LinearChart = function() {};
 widgets.LinearChart.prototype = new widgets.Chart();
+widgets.LinearChart.prototype.constructor = widgets.LinearChart;
+
 
 widgets.LinearChart.prototype._axisBottom = function(_axis) {
   var axis = this._axisBottomCommon(_axis);

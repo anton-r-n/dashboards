@@ -5,6 +5,7 @@
 /** @constructor */
 widgets.PieChart = function() {};
 widgets.PieChart.prototype = new Widget();
+widgets.PieChart.prototype.constructor = widgets.PieChart;
 
 
 widgets.PieChart.prototype.process = function(model) {

@@ -5,6 +5,7 @@
 /** @constructor */
 widgets.BarChart = function() {};
 widgets.BarChart.prototype = new widgets.Chart();
+widgets.BarChart.prototype.constructor = widgets.BarChart;
 
 
 widgets.BarChart.prototype._axisBottom = function(_axis) {
