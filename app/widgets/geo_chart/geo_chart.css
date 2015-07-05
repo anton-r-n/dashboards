@@ -65,7 +65,7 @@
   left: -50%;
   cursor: default;
   opacity: .7;
-  transition: all .3s ease;
+  transition: all .2s ease;
   min-width: 2em;
   max-width: 10em;
 }

@@ -43,7 +43,7 @@
           class="map_label"
           style="left:<%: _[i].left %>px;top:<%: _[i].top %>px;">
         <div class="plate">
-          <div class="label_text color_0 border_0">
+          <div class="label_text color_<%: _.idx %> border_<%: _.idx %>">
             <div class="name nowrap_restricted"><%= _[i].name %></div>
             <div class="value nowrap_restricted"><%= _[i].value %></div>
           </div>

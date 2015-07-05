@@ -15,7 +15,7 @@
 }
 
 .Colors div.color_4 {
-  background-color: rgb(102, 166, 30);
+  background-color: #558b2f; /* rgb(102, 166, 30); */
 }
 
 .Colors div.color_5 {
@@ -47,7 +47,7 @@
 }
 
 .Colors div.border_4 {
-  border-color: rgb(102, 166, 30);
+  border-color: #558b2f; /* rgb(102, 166, 30); */
 }
 
 .Colors div.border_5 {

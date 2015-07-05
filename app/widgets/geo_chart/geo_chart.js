@@ -28,6 +28,7 @@ widgets.GeoChart.prototype.process = function(model) {
   this.lat = 'lat' in model ? model['lat'] % 90 : 42;
   view['map'] = this.updateMap(this.lon, this.lat);
   view['map']['data'] = this.updateMapData(this.model, 0);
+  view['map']['data']['idx'] = 4;
   return view;
 };
 
