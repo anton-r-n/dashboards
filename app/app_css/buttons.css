@@ -1,0 +1,62 @@
+.btn,
+.btn-flat {
+  outline: none;
+  position: relative;
+  display: inline-block;
+  line-height: 2.5;
+  padding: 0 2em;
+  margin: 0 1em;
+  border-radius: 2px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-size: 95%;
+  cursor: pointer;
+  color: #689f38;
+}
+
+.btn {
+  overflow: hidden;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
+  transition: all .3s ease;
+}
+
+.btn:hover {
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.16), 0 1px 7px 0 rgba(0, 0, 0, 0.12);
+}
+
+.btn:hover:active {
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.btn:after {
+  content: "";
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  display: block;
+  width: 0;
+  height: 0;
+  padding-top: 0;
+  border-radius: 100%;
+  background-color: rgba(236, 240, 241, .3);
+  transform: translate(-50%, -50%);
+}
+
+.btn:active:after {
+  width: 120%;
+  height: 120%;
+  padding-top: 120%;
+  transition: all .2s ease-out;
+}
+
+.btn.green {
+  color: #fff;
+  background-color: #689f38;
+}
+
+.btn.green:hover {
+  background-color: #7CB342;
+}

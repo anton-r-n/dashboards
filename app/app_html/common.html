@@ -13,11 +13,13 @@
 
 
 <script data-tpl="Page" type="text/html">
-  <div class="Page" data-obj="<%= _.id %>">
-    <div class="PageHeader">
-      Page <%= _.id %> <%= _.name %>
+  <div class="Page grid" data-obj="<%= _.id %>">
+    <div class="PageHeader col-24">
+      <h1>Page <%= _.id %> <%= _.name %></h1>
+      <div class="btn-flat noselect">button</div>
+      <div class="btn green noselect">button</div>
     </div>
-    <div class="grid">
+    <div class="page_body">
       <%: _.content %>
     </div>
   </div>
