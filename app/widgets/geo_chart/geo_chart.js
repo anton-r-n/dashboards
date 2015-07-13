@@ -14,8 +14,9 @@ widgets.GeoChart.prototype.update_on_resize = function() {
 
 
 widgets.GeoChart.prototype.process = function(model) {
-  var view = {};
   this.tile_size = 256;
+  var model = this.model;
+  var view = {_id: this.id, _type: model.type};
 
   view['name'] = model.name;
   this.height = view['height'] = 350;

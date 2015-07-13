@@ -332,28 +332,31 @@ var data = {
 
 
 $(function() {
-  var update = JSON.parse(JSON.stringify(data));
-
-  console.time('init');
-  var app = new widgets.App().init('App', data);
-  $('body').html(app._html);
-  setTimeout(function() {console.timeEnd('init')}, 0);
-
-  /*
+  var start_ts = new Date();
+  var app = new widgets.App().init('App').update(data);
+  var build = new Date() - start_ts;
+  $('body').html(app.toString());
+  var apply = new Date() - start_ts;
   setTimeout(function() {
-    update.nodes[1].name = 'PPP3';
-    update.nodes[2].items = [
+    var render = new Date() - start_ts;
+    console.log('build', build, 'apply', apply, 'render', render);
+  }, 0);
+
+  setTimeout(function() {
+    data.nodes[0].text = 'New Header PPP3';
+    data.nodes[2].items = [
       {'name': 'NewLink1', 'link': '/aaaaa1'},
       {'name': 'NewLink2', 'link': '/bbbbb2'},
       {'name': 'NewLink3', 'link': '/ccccc3'}
     ];
 
-    console.time('update');
-    app.update(update);
-    setTimeout(function() {console.timeEnd('update')}, 0);
+    var start_ts = new Date();
+    app.update();
+    var build = new Date() - start_ts;
+    setTimeout(function() {
+      var render = new Date() - start_ts;
+      console.log('build', build, 'render', render);
+    }, 0);
   }, 2000);
-  */
 
 });
-
-console.log('Ok');

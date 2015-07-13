@@ -9,9 +9,8 @@ widgets.PieChart.prototype.constructor = widgets.PieChart;
 
 
 widgets.PieChart.prototype.process = function(model) {
-  // console.log('process ' + model.type);
-
-  var view = {};
+  var model = this.model;
+  var view = {_id: this.id, _type: model.type};
 
   var radius = 74,
       inner_radius = 30,

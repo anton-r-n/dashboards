@@ -13,10 +13,9 @@ widgets.Chart.prototype.update_on_resize = function() {
 };
 
 
-widgets.Chart.prototype.process = function(model) {
-  // console.log('process ' + model.type);
-
-  var view = {};
+widgets.Chart.prototype.process = function() {
+  var model = this.model;
+  var view = {_id: this.id, _type: model.type};
 
   this.geom = {'width': model._width, 'height': 120};
   this.margin = {'top': 5, 'right': 50, 'bottom': 20, 'left': 50};

@@ -8,45 +8,83 @@ var widgets = {};
 function Widget() {}
 
 
-/**
- * Set initial state
- */
-Widget.prototype.init = function(id, model) {
+Widget.prototype.init = function(id) {
+  var self = this;
+  setTimeout(function() {
+    self._root = $('[data-obj="' + self.id + '"]');
+    self.addEvents();
+  }, 0);
+
   this.id = id;
   this.nodes = [];
-  this.model = model;
-  this._render(model);
-  setTimeout((function() {
-    this._findRootNode();
-    this.addEvents();
-  }).bind(this), 0);
   return this;
 };
 
 
-/**
- * Update
- */
 Widget.prototype.update = function(model) {
-  this.model = model;
-  this._destroyChildNodes();
-  this._render(model);
-  this._updateRootNode();
+  model = this.model = model ? model : this.model;
+  model.nodes = model.nodes || [];
+  this.type = model.type;
+  var view = this.process();
+  var diff = this._diffView(view) || this._diffNodes(this.nodes, model.nodes || []);
+
+  if (diff) {
+    this.destroy();
+    this.view = view;
+    this.propagate(model);
+    if (this._root) {
+      updateNode(this._root[0], this);
+    }
+  }
+  else {
+    this.propagate(model);
+  }
+
+
+  return this;
 };
 
 
-/**
- * Destroy
- */
+Widget.prototype.process = function() {
+  var model = this.model;
+  var view = {_id: this.id, _type: model.type};
+  for (var prop in model) {
+    if (prop !== 'nodes' && prop[0] !== '_' && !(prop in view)) {
+      view[prop] = model[prop];
+    }
+  }
+  return view;
+}
+
+
+Widget.prototype.propagate = function() {
+  var model = this.model;
+  if (model.nodes instanceof Array) {
+    for (var i = 0; i < model.nodes.length; i++) {
+      if (!this.nodes[i]) {
+        var type = model.nodes[i].type;
+        var id = this.id + '.' + type + i;
+        this.nodes[i] = type in widgets ? new widgets[type] : new Widget;
+        this.nodes[i].init(id);
+      }
+      this.nodes[i].update(model.nodes[i]);
+    }
+  }
+};
+
+
 Widget.prototype.destroy = function() {
-  // console.log('-- destroy %s', this.id);
-  this._destroyChildNodes();
-  this.removeEvents();
+  this.nodes.forEach(function(node) {
+    node.removeEvents();
+    node.destroy();
+  });
+  this.nodes = [];
 };
 
 
-Widget.prototype.process = function(model) {
-  return {};
+Widget.prototype.toString = function() {
+  this.view._nodes = this.nodes.join('');
+  return $.tpl(this.view._type, this.view);
 };
 
 
@@ -56,61 +94,42 @@ Widget.prototype.addEvents = function() {};
 Widget.prototype.removeEvents = function() {};
 
 
-Widget.prototype._findRootNode = function() {
-  this._root = $('[data-obj="' + this.id + '"]');
-};
+Widget.prototype._replacer = function(key, value) {
+  if (key[0] !== '_') {
+    return value;
+  }
+}
 
 
-Widget.prototype._updateRootNode = function() {
-  var render = $.render(this._html);
-  this._root.html('');
+Widget.prototype._diffView = function(view) {
+  var view_json = JSON.stringify(view, this._replacer);
+  var diff = this.view_json !== view_json;
+  this.view_json = view_json;
+  return diff;
+}
+
+
+Widget.prototype._diffNodes = function(a, b) {
+  if (a === b) return false
+  if (a == null || b == null) return true;
+  if (a.length !== b.length) return true;
+  for (var i = 0; i < a.length; i++) {
+    if (a[i].type !== b[i].type) return true;
+  }
+  return false;
+}
+
+
+function updateNode(node, html) {
+  var render = $.render(html);
+  node.innerHTML = '';
 
   var attrs = render.attributes;
   for (var i = 0; i < attrs.length; i++) {
-    this._root[0].setAttribute(attrs[i].name, attrs[i].value);
+    node.setAttribute(attrs[i].name, attrs[i].value);
   }
 
   while (render.firstChild) {
-    this._root[0].appendChild(render.firstChild);
+    node.appendChild(render.firstChild);
   }
-};
-
-
-Widget.prototype._render = function(model) {
-  this.view = this.process(model);
-  this.view.id = this.id;
-  this._renderRecursively(model);
-};
-
-
-Widget.prototype._renderRecursively = function(model) {
-
-  // console.log('render %s', this.id, 'width', model._width);
-
-  if (model.nodes && model.nodes.length) {
-    this.nodes = this._initNodes(model.nodes);
-    this.view.content = this._collectContent(this.nodes);
-  }
-  this._html = $.tpl(model.type, this.view);
-};
-
-
-Widget.prototype._initNodes = function(nodes) {
-  var self = this;
-  return nodes.map(function(item, idx) {
-    var wid = self.id + '.' + item.type + idx;
-    var widget = item.type in widgets ? new widgets[item.type] : new Widget;
-    return widget.init(wid, item);
-  });
-};
-
-
-Widget.prototype._collectContent = function(nodes) {
-  return nodes.map(function(item) {return item._html}).join('');
-};
-
-Widget.prototype._destroyChildNodes = function() {
-  for (var i = 0; i < this.nodes.length; i++) {
-    this.nodes[i].destroy();
-  }
-};
+}

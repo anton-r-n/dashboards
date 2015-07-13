@@ -8,9 +8,11 @@ widgets.App.prototype = new Widget();
 
 
 widgets.App.prototype.process = function() {
+  var model = this.model;
+  var view = {_id: this.id, _type: model.type};
   this.width = this._get_width();
   widgets.App._model_width(this.model, this.width);
-  return {};
+  return view;
 };
 
 
@@ -30,12 +32,18 @@ widgets.App.prototype.removeEvents = function() {
 
 
 widgets.App.prototype.updateWidth = function() {
+  var start_ts = new Date();
   var width = this._get_width();
   if (this.width !== width) {
     this.width = width;
-    widgets.App._model_width(this.model, this._get_width());
-    widgets.App._nodes_width(this);
+    widgets.App._model_width(this.model, width);
+    this.update(this.model);
   }
+  var build = new Date() - start_ts;
+  setTimeout(function() {
+    var render = new Date() - start_ts;
+    console.log('build', build, 'render', render);
+  }, 0);
 };
 
 
@@ -48,50 +56,4 @@ widgets.App._model_width = function(model, width) {
       widgets.App._model_width(model.nodes[i], model._width);
     }
   }
-};
-
-
-/** staticmethod */
-widgets.App._nodes_width = function(node) {
-  if (node.update_on_resize) {
-    node.update_on_resize();
-  }
-  if (node.nodes && node.nodes.length) {
-    for (var i = 0; i < node.nodes.length; i++) {
-      widgets.App._nodes_width(node.nodes[i]);
-    }
-  }
-};
-
-
-
-/** @constructor */
-widgets.Header = function() {};
-widgets.Header.prototype = new Widget();
-
-
-widgets.Header.prototype.process = function(model) {
-  return {text: model.text};
-};
-
-
-
-/** @constructor */
-widgets.Page = function() {};
-widgets.Page.prototype = new Widget();
-
-
-widgets.Page.prototype.process = function(model) {
-  return {name: model.name};
-};
-
-
-
-/** @constructor */
-widgets.Column = function() {};
-widgets.Column.prototype = new Widget();
-
-
-widgets.Column.prototype.process = function(model) {
-  return {cols: model.cols};
 };
