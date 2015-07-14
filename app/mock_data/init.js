@@ -331,6 +331,36 @@ var data = {
 };
 
 
+function find_linear_charts(nodes, charts) {
+  for (var i = 0; i < nodes.length; i++) {
+    var node = nodes[i];
+    if (node.type === 'LinearChart') {
+      charts.push(node);
+    }
+    if (node.hasOwnProperty('nodes')) {
+      find_linear_charts(node.nodes, charts);
+    }
+  }
+}
+
+function update_linear_chart(chart) {
+  chart.axes.bottom.start += chart.axes.bottom.step;
+  for (var axis in chart.data) {
+    var lines = chart.data[axis];
+    for (var i = 0; i < lines.length; i++) {
+      var d = lines[i];
+      d.push(d.shift());
+    }
+  }
+}
+
+function update_all_linear_charts(data) {
+  var linear_charts = [];
+  find_linear_charts([data], linear_charts);
+  linear_charts.map(update_linear_chart);
+}
+
+
 $(function() {
   var start_ts = new Date();
   var app = new widgets.App().init('App').update(data);
@@ -339,9 +369,10 @@ $(function() {
   var apply = new Date() - start_ts;
   setTimeout(function() {
     var render = new Date() - start_ts;
-    console.log('build', build, 'apply', apply, 'render', render);
+    console.log('init', 'build', build, 'apply', apply, 'render', render);
   }, 0);
 
+  /*
   setTimeout(function() {
     data.nodes[0].text = 'New Header PPP3';
     data.nodes[2].items = [
@@ -355,8 +386,24 @@ $(function() {
     var build = new Date() - start_ts;
     setTimeout(function() {
       var render = new Date() - start_ts;
-      console.log('build', build, 'render', render);
+      console.log('update', 'build', build, 'render', render);
     }, 0);
   }, 2000);
+  */
 
+  var num = 300;
+  var interval = setInterval(function() {
+    update_all_linear_charts(data);
+    var start_ts = new Date();
+    app.update();
+    var build = new Date() - start_ts;
+    setTimeout(function() {
+      var render = new Date() - start_ts;
+      console.log('update', 'build', build, 'render', render);
+    }, 0);
+    num--;
+    if (num === 0) {
+      clearInterval(interval);
+    }
+  }, 100);
 });
