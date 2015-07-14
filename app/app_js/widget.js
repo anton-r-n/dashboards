@@ -26,7 +26,8 @@ Widget.prototype.update = function(model) {
   model.nodes = model.nodes || [];
   this.type = model.type;
   var view = this.process();
-  var diff = this._diffView(view) || this._diffNodes(this.nodes, model.nodes || []);
+  var diff = this._diffView(view) ||
+      this._diffNodes(this.nodes, model.nodes || []);
 
   if (diff) {
     this.destroy();
@@ -54,7 +55,7 @@ Widget.prototype.process = function() {
     }
   }
   return view;
-}
+};
 
 
 Widget.prototype.propagate = function() {
@@ -98,7 +99,7 @@ Widget.prototype._replacer = function(key, value) {
   if (key[0] !== '_') {
     return value;
   }
-}
+};
 
 
 Widget.prototype._diffView = function(view) {
@@ -106,18 +107,18 @@ Widget.prototype._diffView = function(view) {
   var diff = this.view_json !== view_json;
   this.view_json = view_json;
   return diff;
-}
+};
 
 
 Widget.prototype._diffNodes = function(a, b) {
-  if (a === b) return false
-  if (a == null || b == null) return true;
-  if (a.length !== b.length) return true;
+  if (a === b) {return false;}
+  if (a == null || b == null) {return true;}
+  if (a.length !== b.length) {return true;}
   for (var i = 0; i < a.length; i++) {
-    if (a[i].type !== b[i].type) return true;
+    if (a[i].type !== b[i].type) {return true;}
   }
   return false;
-}
+};
 
 
 function updateNode(node, html) {
