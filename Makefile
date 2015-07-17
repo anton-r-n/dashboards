@@ -9,6 +9,7 @@ PROD_JS := $(PROD_DIR)/min.js
 HTML_FILES := \
 	app/app_html/common.html \
 	app/widgets/chart/chart.html \
+	app/widgets/chart_highlight/chart_highlight.html \
 	app/widgets/bar_chart/bar_chart.html \
 	app/widgets/linear_chart/linear_chart.html \
 	app/widgets/geo_chart/geo_chart.html \
@@ -23,6 +24,7 @@ CSS_FILES := \
 	app/app_css/header.css \
 	app/app_css/widget.css \
 	app/widgets/chart/chart.css \
+	app/widgets/chart_highlight/chart_highlight.css \
 	app/widgets/bar_chart/bar_chart.css \
 	app/widgets/linear_chart/linear_chart.css \
 	app/widgets/geo_chart/geo_chart.css \

@@ -1,0 +1,59 @@
+<script data-tpl="ChartHighlight" type="text/html">
+  <div class="ChartHighlight" data-obj="<%= _._id %>">
+    <% if (_.values) { %>
+      <div class="Colors highlight_group"
+          style="top:<%: _.top %>px;left:<%: _.x %>px;height:<%: _.height %>px">
+        <%: $.tpl('ChartHighlight_values_all', _) %>
+        <%: $.tpl('ChartHighlight_bullets_all', _) %>
+      </div>
+    <% } %>
+  </div>
+</script>
+
+
+<script data-tpl="ChartHighlight_values_all" type="text/html">
+  <div class="values <%: _.side %>" style="top:<%: _.y %>px">
+    <% if ('left' in _.values) { %>
+      <%: $.tpl('ChartHighlight_values', _.values['left']) %>
+    <% } %>
+    <% if ('right' in _.values) { %>
+      <%: $.tpl('ChartHighlight_values', _.values['right']) %>
+    <% } %>
+  </div>
+</script>
+
+
+<script data-tpl="ChartHighlight_values" type="text/html">
+  <div>
+    <% for (var i = 0; i < _.length; i++) { %>
+      <div class="value_line">
+        <div class="marker color_<%: i %>">
+          <div class="bullet color_<%: i %>"></div>
+        </div>
+        <span class="name"><%= _[i].name %></span>
+        &#032;<span class="value"><%= _[i].value %></span>
+      </div>
+    <% } %>
+  </div>
+</script>
+
+
+<script data-tpl="ChartHighlight_bullets_all" type="text/html">
+  <div class="bullets">
+    <% if ('left' in _.values) { %>
+      <%: $.tpl('ChartHighlight_bullets', _.values['left']) %>
+    <% } %>
+    <% if ('right' in _.values) { %>
+      <%: $.tpl('ChartHighlight_bullets', _.values['right']) %>
+    <% } %>
+  </div>
+</script>
+
+
+<script data-tpl="ChartHighlight_bullets" type="text/html">
+  <div>
+    <% for (var i = 0; i < _.length; i++) { %>
+      <div class="bullet color_<%: i %>" style="top:<%: _[i].y %>px"></div>
+    <% } %>
+  </div>
+</script>

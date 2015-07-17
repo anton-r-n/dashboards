@@ -391,7 +391,7 @@ $(function() {
   }, 2000);
   */
 
-  var num = 300;
+  var num = 30;
   var interval = setInterval(function() {
     update_all_linear_charts(data);
     var start_ts = new Date();
@@ -399,7 +399,7 @@ $(function() {
     var build = new Date() - start_ts;
     setTimeout(function() {
       var render = new Date() - start_ts;
-      console.log('update', 'build', build, 'render', render);
+      // console.log('update', 'build', build, 'render', render);
     }, 0);
     num--;
     if (num === 0) {

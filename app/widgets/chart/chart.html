@@ -10,7 +10,7 @@
         <% } %>
       </g>
     </svg>
-    <div class="highlight"></div>
+    <%: _._nodes %>
   </div>
 </script>
 
@@ -44,61 +44,4 @@
   <% for (var i = 0; i < _.length; i++) { %>
     <path class="curve color_<%: i %>" d="<%: _[i] %>" />
   <% } %>
-</script>
-
-
-<script data-tpl="chart_highlight" type="text/html">
-  <div class="Colors highlight_group"
-      style="top:<%: _.top %>px;left:<%: _.x %>px;height:<%: _.height %>px">
-    <%: $.tpl('chart_values_all', _) %>
-    <%: $.tpl('chart_bullets_all', _) %>
-  </div>
-</script>
-
-
-<script data-tpl="chart_values_all" type="text/html">
-  <div class="values <%: _.side %>" style="top:<%: _.y %>px">
-    <% if ('left' in _.values) { %>
-      <%: $.tpl('chart_values', _.values['left']) %>
-    <% } %>
-    <% if ('right' in _.values) { %>
-      <%: $.tpl('chart_values', _.values['right']) %>
-    <% } %>
-  </div>
-</script>
-
-
-<script data-tpl="chart_values" type="text/html">
-  <div>
-    <% for (var i = 0; i < _.length; i++) { %>
-      <div class="value_line">
-        <div class="marker color_<%: i %>">
-          <div class="bullet color_<%: i %>"></div>
-        </div>
-        <span class="name"><%= _[i].name %></span>
-        &#032;<span class="value"><%= _[i].value %></span>
-      </div>
-    <% } %>
-  </div>
-</script>
-
-
-<script data-tpl="chart_bullets_all" type="text/html">
-  <div class="bullets">
-    <% if ('left' in _.values) { %>
-      <%: $.tpl('chart_bullets', _.values['left']) %>
-    <% } %>
-    <% if ('right' in _.values) { %>
-      <%: $.tpl('chart_bullets', _.values['right']) %>
-    <% } %>
-  </div>
-</script>
-
-
-<script data-tpl="chart_bullets" type="text/html">
-  <div>
-    <% for (var i = 0; i < _.length; i++) { %>
-      <div class="bullet color_<%: i %>" style="top:<%: _[i].y %>px"></div>
-    <% } %>
-  </div>
 </script>

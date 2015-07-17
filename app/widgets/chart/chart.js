@@ -11,6 +11,7 @@ widgets.Chart.prototype.constructor = widgets.Chart;
 widgets.Chart.prototype.process = function() {
   var model = this.model;
   var view = {_id: this.id, _type: model.type};
+  this._addHighlight(model);
 
   this.geom = {'width': model._width, 'height': 120};
   this.margin = {'top': 5, 'right': 50, 'bottom': 20, 'left': 50};
@@ -34,7 +35,18 @@ widgets.Chart.prototype.process = function() {
           data, view.axes[type], view.axes['bottom']);
     }
   }
+  this._x && this._highlightPosition(this._x, this._y);
   return view;
+};
+
+
+widgets.Chart.prototype._addHighlight = function(model) {
+  this._highlight = model.nodes.filter(
+      function(node) {return node.type === 'ChartHighlight'})[0];
+  if (!this._highlight) {
+    this._highlight = {'type': 'ChartHighlight'};
+    model.nodes.push(this._highlight);
+  }
 };
 
 
@@ -135,7 +147,6 @@ widgets.Chart.prototype.addEvents = function() {
 widgets.Chart.prototype.mouseenter = function(e) {
   this._body = this._root.find('.chart_body').off('mousemove');
   this._body.on('mousemove', this.mousemove.bind(this));
-  this._highlight = this._root.find('.highlight');
   this._rect = this._body[0].getBoundingClientRect(),
   this._window_width = window.innerWidth;
 };
@@ -143,13 +154,22 @@ widgets.Chart.prototype.mouseenter = function(e) {
 
 widgets.Chart.prototype.mouseleave = function(e) {
   this._body.off('mousemove');
-  this._highlight.html('');
+  this._highlightPosition(0, 0);
+  this.nodes[0] && this.nodes[0].update();
 };
 
 
 widgets.Chart.prototype.mousemove = function(e) {
-  var ex = e.clientX - this._rect.left - this.margin.left,
-      ey = e.clientY - this._rect.top - this.margin.top,
+  this._highlightPosition(e.clientX, e.clientY);
+  this.nodes[0] && this.nodes[0].update();
+};
+
+
+widgets.Chart.prototype._highlightPosition = function(x, y) {
+  this._x = x;
+  this._y = y;
+  var ex = x - this._rect.left - this.margin.left,
+      ey = y - this._rect.top - this.margin.top,
       max_idx = this.view.data_length - 1,
       scale = this.view.axes.bottom.scale,
       step = this.view.axes.bottom.step,
@@ -165,7 +185,7 @@ widgets.Chart.prototype.mousemove = function(e) {
     this._updateHighlight(ey, ex + this.margin.left, values);
   }
   else {
-    this._highlight.html('');
+    delete this._highlight.values;
   }
 };
 
@@ -191,13 +211,11 @@ widgets.Chart.prototype._updateHighlight = function(ey, ex, values) {
   var side = ex > this.geom.width / 2 ? 'right' : 'left';
   side = this._rect.left + ex + 220 > this._window_width ? 'right' : side;
   side = this._rect.left + ex - 220 < 0 ? 'left' : side;
-
-  this._highlight.html($.tpl('chart_highlight', {
-    y: ey - 20,
-    x: ex,
-    side: side,
-    top: this.margin.top,
-    height: this.chart_height,
-    values: values
-  }));
+  var h = this._highlight;
+  h['y'] = ey - 20;
+  h['x'] = ex;
+  h['side'] = side;
+  h['top'] = this.margin.top;
+  h['height'] = this.chart_height;
+  h['values'] = values;
 };
