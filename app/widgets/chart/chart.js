@@ -8,11 +8,6 @@ widgets.Chart.prototype = new Widget();
 widgets.Chart.prototype.constructor = widgets.Chart;
 
 
-widgets.Chart.prototype.update_on_resize = function() {
-  this.update(this.model);
-};
-
-
 widgets.Chart.prototype.process = function() {
   var model = this.model;
   var view = {_id: this.id, _type: model.type};

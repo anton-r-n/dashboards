@@ -8,11 +8,6 @@ widgets.GeoChart.prototype = new Widget();
 widgets.GeoChart.prototype.constructor.GeoChart;
 
 
-widgets.GeoChart.prototype.update_on_resize = function() {
-  this.update(this.model);
-};
-
-
 widgets.GeoChart.prototype.process = function(model) {
   this.tile_size = 256;
   var model = this.model;
